@@ -1,0 +1,134 @@
+body {
+  margin: 0;
+}
+
+h1 {
+  margin: 0;
+}
+
+h2 {
+  margin: 0;
+}
+
+p {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+main {
+  padding: 8px;
+  height: 100%;
+}
+
+.appbar {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 8px;
+  border: 1px solid black;
+  position: sticky;
+  top: 0;
+}
+
+.appbar-nav {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  padding-left: 12px;
+}
+
+.main-details {
+  display: flex;
+  align-items: center;
+  position: relative;
+  bottom: 60px;
+}
+
+.profile-img {
+  border-radius: 50%;
+  margin-right: 16px;
+}
+
+.more-details {
+  margin-top: 16px;
+  position: relative;
+  bottom: 60px;
+}
+
+.profile-posts {
+  margin-top: 32px;
+  width: 100%;
+  height: 100%;
+}
+
+.post-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+.post-list > div {
+  width: 100%;
+  max-width: 400px;
+  height: 400px;
+  max-height: 400px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border: 1px solid black;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.tag {
+  width: 32px;
+  height: 16px;
+  border: 1px solid black;
+  border-radius: 16%;
+  margin-right: 16px;
+  margin-left: 16px;
+}
+
+.food-img {
+  width: 100%;
+  flex-grow: 1;
+  border: 1px solid black;
+}
+
+.food-details {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  border: 1px solid black;
+}
+
+.food-details-container {
+  margin: 8px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.food-tags {
+  display: flex;
+  flex-grow: 1;
+}
+
+.like-count {
+  margin-right: 8px;
+  font-weight: 800;
+}
+
+.like {
+  cursor: pointer;
+}
