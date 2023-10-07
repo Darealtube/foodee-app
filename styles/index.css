@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto:wght@400;500;700&display=swap');
+
 body {
   margin: 0;
 }
@@ -11,6 +13,7 @@ body {
 }
 
 .appbar {
+  z-index: 99999;
   display: flex;
   align-items: center;
   height: 40px;
@@ -23,8 +26,7 @@ body {
 }
 
 .appbar:hover {
-  height: 44px;
-  box-shadow: 7px 7px 6px gray;
+  box-shadow: 4px 4px 6px gray;
 }
 
 .appbar-nav {
@@ -43,7 +45,7 @@ body {
 }
 
 .pfp:hover {
-  opacity: 0.8;
+  border: 1.5px solid red;
   box-shadow: 3px 3px 6px black;
   cursor: pointer;
 }
@@ -84,6 +86,7 @@ main > div {
 .container:hover {
   box-shadow: 8px 8px 6px gray;
   cursor: pointer;
+  transform: scale(1.03);
 }
 
 .container-tag {
@@ -122,8 +125,10 @@ main > div {
 }
 
 .tag-post{
+  font-family: 'Indie Flower';
+  font-weight: bold;
   background-color: #F6F4E8;
-  font-size: 9px;
+  font-size: 10px;
   width: 60px;
   height: 20px;
   border: none;
@@ -167,6 +172,7 @@ main > div {
   width: 100%;
   flex-grow: 1;
   border: none;
+  overflow: hidden;
 }
 
 .food-img img{
