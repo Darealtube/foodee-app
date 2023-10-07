@@ -1,15 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto:wght@400;500;700&display=swap');
 
+html {
+  zoom: 110%;
+}
+
 body {
   margin: 0;
+  background-color: #F6F4E8;
 }
 
 h1 {
   margin: 0;
-}
-
-body {
-  background-color: #F6F4E8;
 }
 
 .appbar {
@@ -45,7 +46,7 @@ body {
 }
 
 .pfp:hover {
-  border: 1.5px solid red;
+  border: 1.5px solid #06bc46;
   box-shadow: 3px 3px 6px black;
   cursor: pointer;
 }
@@ -90,10 +91,18 @@ main > div {
 }
 
 .container-tag {
-  background-color: #1D3124;
+  background-image: url(../public/images/backdrop.png);
+  background-size: 300px 300px;
   box-shadow: 4px 4px 6px gray;
   border: none;
   transition: 0.5s;
+}
+
+.container-tag img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
 }
 
 .container-tag:hover {
@@ -103,7 +112,7 @@ main > div {
 .tag-list button {
   font-family: 'Indie Flower';
   font-weight: bold;
-  background-color: #F6F4E8;
+  background-color: #BACEC1;
   font-size: 10px;
   width: 70px;
   height: 24px;
@@ -146,7 +155,7 @@ main > div {
   color: #F6F4E8;
   font-size: 10px;
   width: 60px;
-  height: 20px;
+  height: 21px;
   border: none;
   padding-left: 5px;
   padding-right: 5px;
