@@ -101,16 +101,31 @@ main > div {
 }
 
 .tag-list button {
-  width: 38px;
-  height: 16px;
-  border: 1px solid #F6F4E8;
-  border-radius: 10%;
+  font-family: 'Indie Flower';
+  font-weight: bold;
+  background-color: #F6F4E8;
+  font-size: 10px;
+  width: 70px;
+  height: 24px;
+  border: none;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  text-align: center;
+  font-size: 10;
+  border-radius: 10px;
   margin-right: 12px;
   margin-left: 12px;
+  box-shadow: 4px 4px 8px black;
+  transition: 0.5s;
 }
 
 .tag-list button:hover {
-  border-radius: 40%;
+  width: 94px;
+  background-color: #E59560;
+  color: #1D3124;
+  font-size: 12px;
   box-shadow: 4px 4px 8px black;
   cursor: pointer;
 }
@@ -127,7 +142,8 @@ main > div {
 .tag-post{
   font-family: 'Indie Flower';
   font-weight: bold;
-  background-color: #F6F4E8;
+  background-color: #1D3124;
+  color: #F6F4E8;
   font-size: 10px;
   width: 60px;
   height: 20px;
@@ -141,13 +157,13 @@ main > div {
   border-radius: 10px;
   margin-right: 10px;
   margin-left: 10px;
-  box-shadow: 1px 1px 1px black;
+  box-shadow: 2px 2px 2px gray;
   transition: 0.3s;
 }
 
 .tag-post:hover{
-  background-color: #1D3124;
-  color: #F6F4E8;
+  background-color: #E59560;
+  color: #1D3124;
   cursor: pointer;
 }
 
