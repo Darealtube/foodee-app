@@ -28,6 +28,8 @@ main {
 }
 
 .appbar {
+  background-image: url(../public/images/backdrop-02.png);
+  background-size: 500px 100px;
   z-index: 99999;
   display: flex;
   align-items: center;
@@ -123,6 +125,17 @@ main {
 .container {
   display: flex;
   flex-direction: column;
+  background-color: #BACEC1;
+  box-shadow: 4px 4px 6px gray;
+  transition: 0.5s;
+  margin-right: 12px;
+  margin-left: 12px;
+}
+
+.container:hover {
+  box-shadow: 8px 8px 6px gray;
+  cursor: pointer;
+  transform: scale(1.03);
 }
 
 .tag {
@@ -134,10 +147,50 @@ main {
   margin-left: 16px;
 }
 
+.tag-post{
+  font-family: 'Indie Flower';
+  font-weight: bold;
+  background-color: #1D3124;
+  color: #F6F4E8;
+  font-size: 10px;
+  width: 60px;
+  height: 21px;
+  border: none;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  text-align: center;
+  font-size: 10;
+  border-radius: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+  box-shadow: 2px 2px 2px gray;
+  transition: 0.3s;
+}
+
+.tag-post:hover{
+  background-color: #E59560;
+  color: #1D3124;
+  cursor: pointer;
+}
+
+.tag-post:active {
+  opacity: 0.7;
+  transition: 0.2s;
+}
+
 .food-img {
   width: 100%;
   flex-grow: 1;
-  border: 1px solid black;
+  border: none;
+  overflow: hidden;
+}
+
+.food-img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .food-details {
@@ -161,10 +214,23 @@ main {
 }
 
 .like-count {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 14px;
   margin-right: 8px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .like {
   cursor: pointer;
+  transition: 1;
+  
+}
+
+.like:hover {
+  color: rgb(197, 0, 0);
+  transform: scale(1.1, 1.1);
+}
+
+.like:active {
+  opacity: 0.4;
 }

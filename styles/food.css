@@ -23,6 +23,8 @@ p {
 }
 
 .appbar {
+  background-image: url(../public/images/backdrop-02.png);
+  background-size: 500px 100px;
   z-index: 99999;
   display: flex;
   align-items: center;
