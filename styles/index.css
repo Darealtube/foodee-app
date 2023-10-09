@@ -83,6 +83,41 @@ main > div {
   border: 1px solid black;
 }
 
+form.search {
+  width: 30%;
+  display: flex;
+}
+
+form.search input[type=text] {
+  padding: 10px;
+  font-family: 'Indie Flower';
+  font-size: 18px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+}
+
+form.search button {
+  float: left;
+  width: 10%;
+  padding: 2px;
+  background: inherit;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+form.search span:hover {
+  text-shadow: 1px 1px 1px gray;
+  transition: 0.5s;
+}
+
+form.search::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 .container {
   display: flex;
   flex-direction: column;
