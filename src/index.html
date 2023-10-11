@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FOODEE</title>
     <link
       rel="stylesheet"
@@ -15,11 +15,15 @@
   <body>
     <header class="appbar">
       <nav class="appbar-nav">
-        <h1 style="flex-grow: 1; font-family: 'Indie Flower'; font-weight: bold">FOODEE</h1>
-
+        <a href="./index.html" class="pageTitle"><h1>FOODEE</h1></a>
+        <span style="flex-grow: 1"></span>
         <!-- Search Bar -->
         <form class="search" action="">
-          <input type="text" placeholder="What are you craving?" name="search-bar">
+          <input
+            type="text"
+            placeholder="What are you craving?"
+            name="search-bar"
+          />
           <button type="submit">
             <span class="material-symbols-outlined"> search </span>
           </button>
@@ -27,14 +31,27 @@
 
         <div class="material-symbols-outlined">favorite</div>
         <div class="pfp">
-          <img src="../public/images/placeholder-pfp-0.avif" width="32px" height="32px" />
+          <img
+            src="../public/images/placeholder-pfp-0.avif"
+            width="32px"
+            height="32px"
+          />
         </div>
       </nav>
     </header>
 
     <main>
       <div class="container-tag">
-        <h1 style="margin-top: 16px; margin-left: 16px; color: #F6F4E8; font-family: 'Indie Flower'">Categories</h1>
+        <h1
+          style="
+            margin-top: 16px;
+            margin-left: 16px;
+            color: #f6f4e8;
+            font-family: 'Indie Flower';
+          "
+        >
+          Categories
+        </h1>
         <div class="tag-list">
           <!-- This is the list of all tags -->
           <button class="tag">Affordable</button>
@@ -52,10 +69,12 @@
       </div>
 
       <!-- This is the list of all containers -->
-<!------------------------------------------------------------------>
+      <!------------------------------------------------------------------>
       <div class="container">
         <header class="food-img">
-          <img src="../public/images/placeholder-pic-01.jpg" alt="Food pic" />
+          <a href="./dummy/food/food1.html">
+            <img src="../public/images/placeholder-pic-01.jpg" alt="Food pic" />
+          </a>
         </header>
         <footer class="food-details">
           <div class="food-details-container">
@@ -68,10 +87,13 @@
           </div>
         </footer>
       </div>
-<!------------------------------------------------------------------>
+
+      <!------------------------------------------------------------------>
       <div class="container">
         <header class="food-img">
-          <img src="../public/images/placeholder-pic-02.jpg" alt="Food pic" />
+          <a href="./dummy/food/food2.html">
+            <img src="../public/images/placeholder-pic-02.jpg" alt="Food pic" />
+          </a>
         </header>
         <footer class="food-details">
           <div class="food-details-container">
@@ -84,10 +106,12 @@
           </div>
         </footer>
       </div>
-<!------------------------------------------------------------------>
+      <!------------------------------------------------------------------>
       <div class="container">
         <header class="food-img">
-          <img src="../public/images/placeholder-pic-03.jpg" alt="Food pic" />
+          <a href="./dummy/food/food3.html">
+            <img src="../public/images/placeholder-pic-03.jpg" alt="Food pic" />
+          </a>
         </header>
         <footer class="food-details">
           <div class="food-details-container">
@@ -100,10 +124,12 @@
           </div>
         </footer>
       </div>
-<!------------------------------------------------------------------>
+      <!------------------------------------------------------------------>
       <div class="container">
         <header class="food-img">
-          <img src="../public/images/placeholder-pic-04.jpg" alt="Food pic" />
+          <a href="./dummy/food/food4.html">
+            <img src="../public/images/placeholder-pic-04.jpg" alt="Food pic" />
+          </a>
         </header>
         <footer class="food-details">
           <div class="food-details-container">
@@ -116,10 +142,12 @@
           </div>
         </footer>
       </div>
-<!------------------------------------------------------------------>
+      <!------------------------------------------------------------------>
       <div class="container">
         <header class="food-img">
-          <img src="../public/images/placeholder-pic-05.jpg" alt="Food pic" />
+          <a href="./dummy/food/food5.html">
+            <img src="../public/images/placeholder-pic-05.jpg" alt="Food pic" />
+          </a>
         </header>
         <footer class="food-details">
           <div class="food-details-container">
@@ -132,9 +160,8 @@
           </div>
         </footer>
       </div>
-<!------------------------------------------------------------------>
+      <!------------------------------------------------------------------>
       <!-- This is the list of all containers -->
-
     </main>
     <script src="/scripts/index.js"></script>
   </body>

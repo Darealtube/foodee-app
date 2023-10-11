@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto:wght@400;500;700&display=swap");
 
 html {
   zoom: 110%;
@@ -6,11 +6,18 @@ html {
 
 body {
   margin: 0;
-  background-color: #F6F4E8;
+  background-color: #f6f4e8;
 }
 
 h1 {
   margin: 0;
+}
+
+.pageTitle {
+  font-family: "Indie Flower";
+  font-weight: bold;
+  text-decoration: none;
+  color: inherit;
 }
 
 .appbar {
@@ -23,7 +30,7 @@ h1 {
   padding: 8px;
   position: sticky;
   top: 0;
-  background-color: #E59560;
+  background-color: #e59560;
   box-shadow: 3px 3px 6px gray;
   transition: 0.5s;
 }
@@ -39,17 +46,16 @@ h1 {
 }
 
 .pfp {
-  width: 32px; 
+  width: 32px;
   height: 32px;
-  border: 1px solid black;
   border-radius: 50%;
   margin-left: 16px;
+  border: 1.5px solid #000;
   transition: 0.5s;
 }
 
 .pfp:hover {
   border: 1.5px solid #06bc46;
-  box-shadow: 3px 3px 6px black;
   cursor: pointer;
 }
 
@@ -80,7 +86,6 @@ main > div {
   max-height: 400px;
   margin-top: 16px;
   margin-bottom: 16px;
-  border: 1px solid black;
 }
 
 form.search {
@@ -88,9 +93,9 @@ form.search {
   display: flex;
 }
 
-form.search input[type=text] {
+form.search input[type="text"] {
   padding: 10px;
-  font-family: 'Indie Flower';
+  font-family: "Indie Flower";
   font-size: 18px;
   border: 1px solid grey;
   float: left;
@@ -121,15 +126,14 @@ form.search::after {
 .container {
   display: flex;
   flex-direction: column;
-  background-color: #BACEC1;
+  background-color: #bacec1;
   box-shadow: 4px 4px 6px gray;
-  transition: 0.5s;
+  transition: 0.5s ease-in-out;
 }
 
 .container:hover {
   box-shadow: 8px 8px 6px gray;
   cursor: pointer;
-  transform: scale(1.03);
 }
 
 .container-tag {
@@ -137,14 +141,9 @@ form.search::after {
   background-size: 300px 300px;
   box-shadow: 4px 4px 6px gray;
   border: none;
-  transition: 0.5s;
 }
 
-.container-tag:hover {
-  background-size: 350px 350px;
-}
-
-.container-tag img{
+.container-tag img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -156,9 +155,9 @@ form.search::after {
 }
 
 .tag-list button {
-  font-family: 'Indie Flower';
+  font-family: "Indie Flower";
   font-weight: bold;
-  background-color: #BACEC1;
+  background-color: #bacec1;
   font-size: 10px;
   width: 70px;
   height: 24px;
@@ -177,9 +176,8 @@ form.search::after {
 }
 
 .tag-list button:hover {
-  width: 94px;
-  background-color: #E59560;
-  color: #1D3124;
+  background-color: #e59560;
+  color: #1d3124;
   font-size: 12px;
   box-shadow: 4px 4px 8px black;
   cursor: pointer;
@@ -199,11 +197,11 @@ form.search::after {
   margin-left: 16px;
 }
 
-.tag-post{
-  font-family: 'Indie Flower';
+.tag-post {
+  font-family: "Indie Flower";
   font-weight: bold;
-  background-color: #1D3124;
-  color: #F6F4E8;
+  background-color: #1d3124;
+  color: #f6f4e8;
   font-size: 10px;
   width: 60px;
   height: 21px;
@@ -221,9 +219,9 @@ form.search::after {
   transition: 0.3s;
 }
 
-.tag-post:hover{
-  background-color: #E59560;
-  color: #1D3124;
+.tag-post:hover {
+  background-color: #e59560;
+  color: #1d3124;
   cursor: pointer;
 }
 
@@ -251,15 +249,21 @@ form.search::after {
 
 .food-img {
   width: 100%;
+  height: 100%;
   flex-grow: 1;
   border: none;
   overflow: hidden;
 }
 
-.food-img img{
+.food-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: all 200ms ease-in-out;
+}
+
+.food-img img:hover {
+  transform: scale(1.03);
 }
 
 .food-details {
@@ -267,7 +271,6 @@ form.search::after {
   align-items: center;
   width: 100%;
   height: 40px;
-  border: 1px solid black;
 }
 
 .food-details-container {
@@ -283,7 +286,7 @@ form.search::after {
 }
 
 .like-count {
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 14px;
   margin-right: 8px;
   font-weight: 600;
@@ -292,7 +295,6 @@ form.search::after {
 .like {
   cursor: pointer;
   transition: 1;
-  
 }
 
 .like:hover {
