@@ -14,13 +14,13 @@ h1 {
 }
 
 .pageTitle {
-  font-family: "Indie Flower";
-  font-weight: bold;
   text-decoration: none;
   color: inherit;
 }
 
 .appbar {
+  font-family: "Indie Flower";
+  font-weight: bold;
   background-image: url(../public/images/backdrop-02.png);
   background-size: 500px 100px;
   z-index: 99999;
@@ -35,14 +35,31 @@ h1 {
   transition: 0.5s;
 }
 
-.appbar:hover {
-  box-shadow: 4px 4px 6px gray;
-}
-
 .appbar-nav {
   display: flex;
   align-items: center;
   width: 100%;
+}
+
+.loginBtn {
+  cursor: pointer;
+  background-color: #1d3124;
+  color: #f6f4e8;
+  font-family: "Indie Flower";
+  outline: none;
+  border: none;
+  width: 80px;
+  height: 40px;
+  border-radius: 10%;
+  margin-left: 8px;
+  box-shadow: 3px 3px 6px #000;
+  transition: all 200ms ease-in-out;
+}
+
+.loginBtn:hover {
+  box-shadow: 4px 4px 6px #000;
+  background-color: #001011;
+  color: #f6f4e8;
 }
 
 .pfp {
