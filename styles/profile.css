@@ -130,6 +130,7 @@ main {
 .profile-img {
   border-radius: 50%;
   margin-right: 16px;
+  bottom: 60px;
 }
 
 .other-details {
@@ -147,14 +148,17 @@ main {
   border-radius: 4px;
 }
 
-.intro-text{
-  text-align: center;
+.bio-text{
+  text-align: justify;
   margin: 10px 0;
   font-size: 15px;
 }
 
 .profile-posts {
+  display: grid;
   flex-basis:55%;
+  grid-template-columns: repeat(2, auto);
+  grid-gap: 10px;
 }
 
 .post-list {
