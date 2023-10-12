@@ -7,6 +7,8 @@ html {
 body {
   margin: 0;
   background-color: #f6f4e8;
+  background-image: url(../public/images/backdrop-03.png);
+  background-size: 1800px 1800px;
 }
 
 h1 {
@@ -121,7 +123,6 @@ main {
     padding: 0 15px;
     min-height: 100vh;
     justify-content: center;
-    background: #f0f2f5;
 }
 
 .page {
