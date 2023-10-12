@@ -17,14 +17,37 @@
       <nav class="appbar-nav">
         <a href="./index.html" class="pageTitle"><h1>FOODEE</h1></a>
         <span style="flex-grow: 1"></span>
-        <div class="material-symbols-outlined">favorite</div>
+        <!-- Search Bar -->
+        <form class="search" action="">
+          <input
+            type="text"
+            placeholder="What are you craving?"
+            name="search-bar"
+          />
+          <button type="submit">
+            <span class="material-symbols-outlined"> search </span>
+          </button>
+        </form>
+
+        <a
+          href="./createpost.html"
+          style="text-decoration: none; color: inherit"
+        >
+          <span class="material-symbols-outlined" style="margin-right: 8px">
+            add
+          </span>
+        </a>
+        <a href="./login.html"><button class="loginBtn">LOG IN</button></a>
+        <!-- 
+        THIS VIEW IF USER IS LOGGED IN
         <div class="pfp">
           <img
             src="../public/images/placeholder-pfp-0.avif"
             width="32px"
             height="32px"
           />
-        </div>
+        </div> 
+        -->
       </nav>
     </header>
 

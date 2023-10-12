@@ -17,8 +17,29 @@
       <nav class="appbar-nav">
         <a href="../../index.html" class="pageTitle"><h1>FOODEE</h1></a>
         <span style="flex-grow: 1"></span>
-        <div class="material-symbols-outlined">favorite</div>
-        <button class="loginBtn">LOG IN</button>
+        <!-- Search Bar -->
+        <form class="search" action="">
+          <input
+            type="text"
+            placeholder="What are you craving?"
+            name="search-bar"
+          />
+          <button type="submit">
+            <span class="material-symbols-outlined"> search </span>
+          </button>
+        </form>
+
+        <a
+          href="../../../createpost.html"
+          style="text-decoration: none; color: inherit"
+        >
+          <span class="material-symbols-outlined" style="margin-right: 8px">
+            add
+          </span>
+        </a>
+        <a href="../../../login.html"
+          ><button class="loginBtn">LOG IN</button></a
+        >
         <!-- 
         THIS VIEW IF USER IS LOGGED IN
         <div class="pfp">
@@ -34,10 +55,14 @@
 
     <main>
       <div class="profile-details">
-        <img src="../../../public/images/backdrop-01.png" alt="backdrop-02" class="backdrop-img" width="100%" height="320px" />     
+        <div class="backdrop-container">
+        <img src="../../../public/images/backdrop-01.png" alt="backdrop-02" class="backdrop-img" width="100%" height="320px" />    
+      </div> 
           <div class="profile-details-container">
             <div class="main-details">
+              <div class="pfp-container">
               <img src="../../../public/images/pfp-02.png" alt="pfp-02" width="160px" height="160px" class="profile-img" />
+            </div>
               <h1 class="profile-name">Dave De Leon</h1>
             </div>
           </div>
