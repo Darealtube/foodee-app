@@ -132,6 +132,12 @@ main {
   background-color: inherit;
   border: none;
   border-bottom: 1px solid;
+  min-height: 20px;
+  max-height: 80px;
+  word-break: break-all;
+  word-wrap: break-word;
+  overflow-y: auto;
+  white-space: pre-wrap;
 }
 
 .comment-button {
