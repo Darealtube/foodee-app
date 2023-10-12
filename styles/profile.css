@@ -80,7 +80,6 @@ main {
   color: #f6f4e8;
 }
 
-
 .pfp {
   width: 32px;
   height: 32px;
@@ -107,7 +106,7 @@ main {
   padding: 20px;
 }
 
-.backdrop-img{
+.backdrop-img {
   width: 100%;
   border-radius: 6px;
   margin-bottom: 14px;
@@ -119,7 +118,6 @@ main {
   padding-left: 12px;
 }
 
-
 .main-details {
   display: flex;
   align-items: center;
@@ -127,9 +125,30 @@ main {
   bottom: 60px;
 }
 
-.profile-img {
+.backdrop-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 320px;
+}
+
+.pfp-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
+  position: relative;
   margin-right: 16px;
+  border: 4px solid #001011;
+}
+
+.profile-img {
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .other-details {
@@ -140,21 +159,21 @@ main {
 }
 
 .more-details {
-  flex-basis:33%;
+  flex-basis: 33%;
   background: #bacec1;
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 4px;
 }
 
-.intro-text{
+.intro-text {
   text-align: center;
   margin: 10px 0;
   font-size: 15px;
 }
 
 .profile-posts {
-  flex-basis:55%;
+  flex-basis: 55%;
 }
 
 .post-list {
@@ -285,4 +304,13 @@ main {
 
 .like:active {
   opacity: 0.4;
+}
+
+.location-input {
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-bottom: 1px solid;
+  outline: none;
+  background-color: inherit;
 }

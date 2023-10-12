@@ -9,6 +9,10 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
     <link rel="stylesheet" href="../styles/profile.css" />
   </head>
 
@@ -30,21 +34,37 @@
 
     <main>
       <div class="profile-details">
-        <img src="" alt="" class="backdrop-img" width="100%" height="320px" />
+        <div class="backdrop-container">
+          <span
+            class="material-symbols-outlined"
+            style="position: absolute; cursor: pointer"
+          >
+            photo_camera
+          </span>
+          <input id="pfp-input" type="file" style="display: none" />
+          <img src="" alt="" class="backdrop-img" width="100%" height="100%" />
+        </div>
         <div class="profile-details-container">
           <div class="main-details">
             <div class="pfp-container">
               <img
-                src="../public/images/pfp-02.png"
-                alt="pfp"
-                width="100%"
-                height="100%"
+                src=""
+                alt=""
+                width="160px"
+                height="160px"
                 class="profile-img"
               />
+              <span
+                class="material-symbols-outlined"
+                style="position: absolute; cursor: pointer"
+              >
+                photo_camera
+              </span>
+              <input id="pfp-input" type="file" style="display: none" />
             </div>
             <div style="display: flex; flex-direction: column">
               <h1 class="profile-name">Dave De Leon</h1>
-              <a href="./editprofile.html"><p>Edit Profile</p></a>
+              <a href="./profile.html"><p>Cancel Edit</p></a>
             </div>
           </div>
         </div>
@@ -52,17 +72,19 @@
         <div class="other-details">
           <div class="more-details">
             <p>Intro</p>
-            <p class="intro-text">
-              I am Dave De Leon. A 20-year-old DLSU food enthusiast and a food
-              blogger for 7 months. I have liked food ever since I was a child
-              and I've been critiquing food from my hometown, all the way to
-              college where I study right now in De La Salle University Manila.
-              I expertise in food around that could give cheap and delicious
-              food options for lasallians.
-            </p>
-
-            <li>Lives in Quezon City, Philippines</li>
-            <li>Studies at De La Salle University - Manila</li>
+            <textarea
+              rows="12"
+              cols="40"
+              style="resize: none; width: 100%"
+            ></textarea>
+            <div>
+              <input
+                type="text"
+                style="width: 100%; height: 40px"
+                class="location-input"
+                placeholder="Enter your location"
+              />
+            </div>
           </div>
 
           <div class="profile-posts">
