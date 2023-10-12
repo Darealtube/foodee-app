@@ -1,106 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto:wght@400;500;700&display=swap");
-
-html {
-  zoom: 110%;
-}
-
-body {
-  margin: 0;
-  background-color: #f6f4e8;
-}
-
-h1 {
-  margin: 0;
-}
+@import "similar-styles.css";
 
 h2 {
   margin: 0;
 }
 
-p {
-  margin-top: 4px;
-  margin-bottom: 4px;
-}
 
 main {
   padding: 8px;
   height: 100%;
 }
 
-.pageTitle {
-  font-family: "Indie Flower";
-  font-weight: bold;
-  text-decoration: none;
-  color: inherit;
-}
-
-.appbar {
-  background-image: url(../public/images/backdrop-02.png);
-  background-size: 500px 100px;
-  z-index: 99999;
-  display: flex;
-  align-items: center;
-  height: 40px;
-  padding: 8px;
-  position: sticky;
-  top: 0;
-  background-color: #e59560;
-  box-shadow: 3px 3px 6px gray;
-  transition: 0.5s;
-}
-
-.appbar:hover {
-  box-shadow: 4px 4px 6px gray;
-}
-
-.appbar-nav {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.loginBtn {
-  cursor: pointer;
-  background-color: #1d3124;
-  color: #f6f4e8;
-  font-family: "Indie Flower";
-  outline: none;
-  border: none;
-  width: 80px;
-  height: 40px;
-  border-radius: 10%;
-  margin-left: 8px;
-  box-shadow: 3px 3px 6px #000;
-  transition: all 200ms ease-in-out;
-}
-
-.loginBtn:hover {
-  box-shadow: 4px 4px 6px #000;
-  background-color: #001011;
-  color: #f6f4e8;
-}
-
-.pfp {
-  width: 32px;
-  height: 32px;
-  border: 1px solid black;
-  border-radius: 50%;
-  margin-left: 16px;
-  transition: 0.5s;
-}
-
-.pfp:hover {
-  border: 1.5px solid #06bc46;
-  box-shadow: 3px 3px 6px black;
-  cursor: pointer;
-}
-
-.pfp img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-}
 
 .profile-details {
   padding: 20px;
@@ -136,6 +46,7 @@ main {
 
 .backdrop-container img {
   object-fit: cover;
+  box-shadow: 2px 2px 2px gray;
 }
 
 .pfp-container {
@@ -147,7 +58,8 @@ main {
   border-radius: 50%;
   position: relative;
   margin-right: 16px;
-  border: 4px solid #001011;
+  border: 2px solid #001011;
+  box-shadow: 2px 2px 2px gray;
 }
 
 .profile-img {
@@ -200,118 +112,6 @@ main {
   margin-top: 16px;
   margin-bottom: 16px;
   border: 1px solid black;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  background-color: #bacec1;
-  box-shadow: 4px 4px 6px gray;
-  transition: 0.5s;
-  margin-right: 12px;
-  margin-left: 12px;
-}
-
-.container:hover {
-  box-shadow: 8px 8px 6px gray;
-  cursor: pointer;
-  transform: scale(1.03);
-}
-
-.tag {
-  width: 32px;
-  height: 16px;
-  border: 1px solid black;
-  border-radius: 16%;
-  margin-right: 16px;
-  margin-left: 16px;
-}
-
-.tag-post {
-  font-family: "Indie Flower";
-  font-weight: bold;
-  background-color: #1d3124;
-  color: #f6f4e8;
-  font-size: 10px;
-  width: 60px;
-  height: 21px;
-  border: none;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-bottom: 5px;
-  padding-top: 5px;
-  text-align: center;
-  font-size: 10;
-  border-radius: 10px;
-  margin-right: 10px;
-  margin-left: 10px;
-  box-shadow: 2px 2px 2px gray;
-  transition: 0.3s;
-}
-
-.tag-post:hover {
-  background-color: #e59560;
-  color: #1d3124;
-  cursor: pointer;
-}
-
-.tag-post:active {
-  opacity: 0.7;
-  transition: 0.2s;
-}
-
-.food-img {
-  width: 100%;
-  flex-grow: 1;
-  border: none;
-  overflow: hidden;
-}
-
-.food-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.food-details {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 40px;
-  border: 1px solid black;
-}
-
-.food-details-container {
-  margin: 8px;
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.food-tags {
-  display: flex;
-  flex-grow: 1;
-}
-
-.like-count {
-  font-family: Georgia, "Times New Roman", Times, serif;
-  font-size: 14px;
-  margin-right: 8px;
-  font-weight: 600;
-}
-
-.like {
-  cursor: pointer;
-  transition: 1;
-}
-
-.like:hover {
-  color: rgb(197, 0, 0);
-  transform: scale(1.1, 1.1);
-}
-
-.like:active {
-  opacity: 0.4;
 }
 
 .location-input {

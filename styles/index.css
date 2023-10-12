@@ -1,92 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto:wght@400;500;700&display=swap");
+@import "similar-styles.css";
 
-html {
-  zoom: 110%;
-}
-
-body {
-  margin: 0;
-  background-color: #f6f4e8;
-}
-
-h1 {
-  margin: 0;
-}
-
-.pageTitle {
-  text-decoration: none;
-  color: inherit;
-}
-
-.appbar {
-  font-family: "Indie Flower";
-  font-weight: bold;
-  background-image: url(../public/images/backdrop-02.png);
-  background-size: 500px 100px;
-  z-index: 99999;
-  display: flex;
-  align-items: center;
-  height: 40px;
-  padding: 8px;
-  position: sticky;
-  top: 0;
-  background-color: #e59560;
-  box-shadow: 3px 3px 6px gray;
-  transition: 0.5s;
-}
-
-.appbar-nav {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.loginBtn {
-  cursor: pointer;
-  background-color: #1d3124;
-  color: #f6f4e8;
-  font-family: "Indie Flower";
-  outline: none;
-  border: none;
-  width: 80px;
-  height: 40px;
-  border-radius: 10%;
-  margin-left: 8px;
-  box-shadow: 3px 3px 6px #000;
-  transition: all 200ms ease-in-out;
-}
-
-.loginBtn:hover {
-  box-shadow: 4px 4px 6px #000;
-  background-color: #001011;
-  color: #f6f4e8;
-}
-
-.pfp {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  margin-left: 16px;
-  border: 1.5px solid #000;
-  transition: 0.5s;
-}
-
-.pfp:hover {
-  border: 1.5px solid #06bc46;
-  cursor: pointer;
-}
-
-.pfp:active {
-  opacity: 0.7;
-  transition: 0.2s;
-}
-
-.pfp img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-}
 
 main {
   display: flex;
@@ -106,15 +20,19 @@ main > div {
 }
 
 form.search {
-  width: 30%;
+  width: 270px;
+  height: 36px;
   display: flex;
 }
 
 form.search input[type="text"] {
+  box-shadow: 1px 1px 2px #000;
+  border-radius: 5%;
+  background-color: #f6f4e8;
   padding: 10px;
   font-family: "Indie Flower";
   font-size: 18px;
-  border: 1px solid grey;
+  border: none;
   float: left;
   width: 80%;
 }
@@ -124,12 +42,15 @@ form.search button {
   width: 10%;
   padding: 2px;
   background: inherit;
-  color: white;
+  color: #1d3124;
   border: none;
   cursor: pointer;
+  transition: 1s;
 }
 
 form.search span:hover {
+  transform: scale(1.2, 1.2);
+  color: #3b7e2e;
   text-shadow: 1px 1px 1px gray;
   transition: 0.5s;
 }
@@ -138,19 +59,6 @@ form.search::after {
   content: "";
   clear: both;
   display: table;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  background-color: #bacec1;
-  box-shadow: 4px 4px 6px gray;
-  transition: 0.5s ease-in-out;
-}
-
-.container:hover {
-  box-shadow: 8px 8px 6px gray;
-  cursor: pointer;
 }
 
 .container-tag {
@@ -205,47 +113,6 @@ form.search::after {
   opacity: 0.7;
 }
 
-.tag {
-  width: 32px;
-  height: 16px;
-  border: 1px solid black;
-  border-radius: 16%;
-  margin-right: 16px;
-  margin-left: 16px;
-}
-
-.tag-post {
-  font-family: "Indie Flower";
-  font-weight: bold;
-  background-color: #1d3124;
-  color: #f6f4e8;
-  font-size: 10px;
-  width: 60px;
-  height: 21px;
-  border: none;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-bottom: 5px;
-  padding-top: 5px;
-  text-align: center;
-  font-size: 10;
-  border-radius: 10px;
-  margin-right: 10px;
-  margin-left: 10px;
-  box-shadow: 2px 2px 2px gray;
-  transition: 0.3s;
-}
-
-.tag-post:hover {
-  background-color: #e59560;
-  color: #1d3124;
-  cursor: pointer;
-}
-
-.tag-post:active {
-  opacity: 0.7;
-  transition: 0.2s;
-}
 
 .tags {
   display: flex;
@@ -264,61 +131,3 @@ form.search::after {
   margin-top: 8px;
 }
 
-.food-img {
-  width: 100%;
-  height: 100%;
-  flex-grow: 1;
-  border: none;
-  overflow: hidden;
-}
-
-.food-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: all 200ms ease-in-out;
-}
-
-.food-img img:hover {
-  transform: scale(1.03);
-}
-
-.food-details {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 40px;
-}
-
-.food-details-container {
-  margin: 8px;
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.food-tags {
-  display: flex;
-  flex-grow: 1;
-}
-
-.like-count {
-  font-family: Georgia, "Times New Roman", Times, serif;
-  font-size: 14px;
-  margin-right: 8px;
-  font-weight: 600;
-}
-
-.like {
-  cursor: pointer;
-  transition: 1;
-}
-
-.like:hover {
-  color: rgb(197, 0, 0);
-  transform: scale(1.1, 1.1);
-}
-
-.like:active {
-  opacity: 0.4;
-}
