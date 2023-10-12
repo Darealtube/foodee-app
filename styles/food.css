@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto:wght@400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
 
 html {
   zoom: 110%;
-  font-family: "Indie Flower";
 }
 
 body {
@@ -115,7 +115,30 @@ main {
 
 .food-img {
   width: 100%;
-  height: 400px;
+  height: auto;
+}
+
+.comment-form {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.comment-input {
+  margin-left: 8px;
+  margin-right: 8px;
+  flex-grow: 1;
+  outline: none;
+  background-color: inherit;
+  border: none;
+  border-bottom: 1px solid;
+}
+
+.comment-button {
+  background-color: inherit;
+  outline: none;
+  border: none;
+  cursor: pointer;
 }
 
 .comment-form {
@@ -153,6 +176,8 @@ main {
   overflow: auto;
   display: flex;
   flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .food-details {
@@ -162,6 +187,10 @@ main {
   height: 100%;
   max-height: 50%;
   padding: 16px;
+}
+
+.food-title {
+  
 }
 
 .food-description {
@@ -201,8 +230,9 @@ main {
 }
 
 .comment-date {
-  font-size: 10px;
+  font-size: 8px;
   color: gray;
-  padding: 0;
+  padding-top: 1px;
+  padding-left: 1px;
   margin: 0;
 }
