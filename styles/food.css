@@ -1,8 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto:wght@400;500;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&family=Young+Serif&display=swap');
 
 html {
   zoom: 110%;
+  font-family: Young serif;
 }
 
 body {
@@ -184,6 +186,7 @@ main {
   background-color: inherit;
   border: none;
   border-bottom: 1px solid;
+  font-family: Roboto;
 }
 
 .comment-button {
@@ -222,6 +225,15 @@ main {
   cursor: pointer;
 }
 
+.comment-msg {
+  font-family: Roboto;
+}
+
+.food-title {
+  font-size: 30px;
+  padding-bottom: 12px;
+}
+
 .food-comments {
   width: 100%;
   height: 100%;
@@ -249,6 +261,7 @@ main {
   width: 100%;
   height: 50%;
   margin-bottom: 8px;
+  font-family: Roboto;
 }
 
 .author-details {
@@ -260,6 +273,7 @@ main {
 .author-img {
   border-radius: 50%;
   margin-right: 8px;
+  object-fit: cover;
 }
 
 .comment {
