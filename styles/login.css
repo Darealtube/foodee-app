@@ -1,14 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto:wght@400;500;700&display=swap");
 
-html {
-  zoom: 110%;
-}
-
 body {
+  display: flex;
+  flex-direction: column;
   margin: 0;
   background-color: #f6f4e8;
   background-image: url(../public/images/backdrop-03.png);
   background-size: 1800px 1800px;
+  height: 100vh;
 }
 
 h1 {
@@ -27,6 +26,8 @@ p {
 main {
   padding: 8px;
   height: 100%;
+  flex-grow: 1;
+  backdrop-filter: brightness(80%) blur(4px);
 }
 
 .pageTitle {
@@ -82,7 +83,6 @@ main {
   color: #f6f4e8;
 }
 
-
 .pfp {
   width: 32px;
   height: 32px;
@@ -108,137 +108,139 @@ main {
 /*-----------------App bar nav here--------------------*/
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Indie Flower', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Indie Flower", sans-serif;
 }
 
 .flex {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .container {
-    padding: 0 15px;
-    min-height: 100vh;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+  min-height: 80vh;
+  justify-content: center;
 }
 
 .page {
-    justify-content: space-between;
-    max-width: 1000px;
-    width: 100%;
+  justify-content: space-between;
+  width: 100vh;
 }
 
 .page .text {
-    margin-bottom: 90px;
+  margin-bottom: 90px;
+  margin-right: 32px;
 }
 
 .page h1 {
-    color: #000000;
-    font-size: 4rem;
-    margin-bottom: 10px;
+  color: #000000;
+  font-size: 4rem;
+  margin-bottom: 10px;
 }
 
 .page p {
-    font-size: 1.75rem;
-    white-space: nowrap;
+  font-size: 1.75rem;
+  white-space: nowrap;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    background: #bacec1;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
-      0 8px 16px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #bacec1;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
 }
 
 form input {
-    height: 55px;
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    margin-bottom: 15px ;
-    font-size: 1rem;
-    padding: 0 14px;
+  height: 55px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  padding: 0 14px;
 }
 
 form input:focus {
-    outline: none;
-    border-color: #1877f2;
+  outline: none;
+  border-color: #1877f2;
 }
 
 ::placeholder {
-    color: #777;
-    font-size: 1.063rem;
+  color: #777;
+  font-size: 1.063rem;
 }
 
 .link {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 15px;
 }
 
 .link .login {
-    border: none;
-    outline: none;
-    cursor: pointer;
-    background: #1d3124;
-    padding: 15px 0;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 1.25rem;
-    font-weight: 600;
-    transition: 0.2s ease;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: #1d3124;
+  padding: 15px 0;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  transition: 0.2s ease;
 }
 
 .link .login:hover {
-    background: #3b7e2e;
+  background: #3b7e2e;
 }
 
 form a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .link .forgot {
-    color: #42b72a;
-    font-size: 0.875rem;
+  color: #42b72a;
+  font-size: 0.875rem;
 }
 
 .link .forgot:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 hr {
-    border: none;
-    height: 1px;
-    background-color: #ccc;
-    margin-bottom: 20px;
-    margin-top: 20px;
+  border: none;
+  height: 1px;
+  background-color: #ccc;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .button {
-    margin-top: 25px;
-    text-align: center;
-    margin-bottom: 20px;
+  margin-top: 25px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .button a {
-    padding: 15px 20px;
-    background: #1d3124;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 1.063rem;
-    font-weight: 600;
-    transition: 0.2s ease;
+  padding: 15px 20px;
+  background: #1d3124;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 1.063rem;
+  font-weight: 600;
+  transition: 0.2s ease;
 }
 
 .button a:hover {
-    background: #3b7e2e;
+  background: #3b7e2e;
 }
