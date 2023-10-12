@@ -134,6 +134,10 @@ main {
   height: 320px;
 }
 
+.backdrop-container img {
+  object-fit: cover;
+}
+
 .pfp-container {
   display: flex;
   align-items: center;
@@ -167,7 +171,7 @@ main {
   border-radius: 4px;
 }
 
-.bio-text{
+.bio-text {
   text-align: justify;
   margin: 10px 0;
   font-size: 15px;
@@ -175,7 +179,7 @@ main {
 
 .profile-posts {
   display: grid;
-  flex-basis:55%;
+  flex-basis: 55%;
   grid-template-columns: repeat(2, auto);
   grid-gap: 10px;
 }
