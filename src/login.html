@@ -9,13 +9,13 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
     />
-    <link rel="stylesheet" href="../../../styles/login.css" />
+    <link rel="stylesheet" href="../styles/login.css" />
   </head>
 
   <body>
     <header class="appbar">
       <nav class="appbar-nav">
-        <a href="../../index.html" class="pageTitle"><h1>FOODEE</h1></a>
+        <a href="../src/index.html" class="pageTitle"><h1>FOODEE</h1></a>
         <span style="flex-grow: 1"></span>
         <div class="material-symbols-outlined">favorite</div>
         <button class="loginBtn">LOG IN</button>
@@ -35,7 +35,27 @@
     <!----------------------------------------- REMOVE THIS UPPER PART TO REMOVE THE APP NAV BAR----------------------------->
 
     <main>
-
+    
+        <div class="container flex">
+            <div class="page flex">
+              <div class="text">
+                <h1>FOODEE</h1>
+                <p>Connect with friends and foodies </p>
+              </div>
+              <form action="#">
+                <input type="email" placeholder="Username or email" required>
+                <input type="password" placeholder="Password" required>
+                <div class="link">
+                  <button type="submit" class="login">Login</button>
+                  <a href="#" class="forgot">Forgot password?</a>
+                </div>
+                <hr>
+                <div class="button">
+                  <a href="#">Sign Up</a>
+                </div>
+              </form>
+            </div>
+          </div>
     </main>
   </body>
 </html>
