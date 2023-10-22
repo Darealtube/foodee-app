@@ -1,0 +1,32 @@
+{
+  "name": "foodee-app",
+  "version": "1.0.0",
+  "description": "The official website for FOODEE.",
+  "main": "app.js",
+  "scripts": {
+    "dev": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Darealtube/foodee-app.git"
+  },
+  "keywords": [
+    "FOODEE",
+    "food",
+    "website"
+  ],
+  "author": "Darryl Javier, Vitto Genuino, Dave De Leon, Valiant Dionela",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Darealtube/foodee-app/issues"
+  },
+  "homepage": "https://github.com/Darealtube/foodee-app#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jquery": "^3.7.1",
+    "mongodb": "^6.2.0",
+    "mongoose": "^7.6.3"
+  }
+}
