@@ -1,6 +1,5 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-// Define your schemas and models here
 const Schema = mongoose.Schema;
 const CommentSchema = new Schema({
   author: mongoose.Schema.Types.ObjectId,
@@ -17,4 +16,4 @@ const CommentSchema = new Schema({
 });
 
 const Comment = mongoose.model("Comment", CommentSchema);
-export default mongoose.models.Comment || Comment;
+module.exports =  mongoose.models.Comment || Comment;

@@ -1,6 +1,5 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-// Define your schemas and models here
 const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
@@ -19,7 +18,7 @@ const PostSchema = new Schema({
   },
   date_created: {
     type: Date,
-    default: Date.now,
+    default: Date.now, // Remember to use Date.now instead of Date.now() so that everytime mongo creates, it executes the function rather than putting the same date in every data
   },
   likes: Number,
   author: mongoose.Schema.Types.ObjectId,
@@ -28,4 +27,4 @@ const PostSchema = new Schema({
 
 const Post = mongoose.model("Post", PostSchema);
 
-export default mongoose.models.Post || Post;
+module.exports = mongoose.models.Post || Post;

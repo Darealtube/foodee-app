@@ -11,6 +11,8 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
     />
     <link rel="stylesheet" href="./styles/login.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./scripts/login.js"></script>
   </head>
 
   <body>
@@ -18,7 +20,6 @@
       <nav class="appbar-nav">
         <a href="./index.html" class="pageTitle"><h1>FOODEE</h1></a>
         <span style="flex-grow: 1"></span>
-
         <!-- 
         THIS VIEW IF USER IS LOGGED IN
         <div class="pfp">
@@ -41,19 +42,37 @@
             <h1>FOODEE</h1>
             <p>Connect with friends and foodies</p>
           </div>
-          <form action="#">
-            <input type="email" placeholder="Username or email" required />
-            <input type="password" placeholder="Password" required />
+          <form id="loginForm">
+            <input
+              id="username"
+              type="email"
+              placeholder="Username or email"
+              required
+            />
+            <input
+              id="password"
+              type="password"
+              placeholder="Password"
+              required
+            />
             <div class="link">
-              <button type="submit" class="login">Login</button>
+              <button type="submit" class="login" data-operation="login">
+                Login
+              </button>
               <a href="#" class="forgot">Forgot password?</a>
             </div>
             <hr />
-            <div class="button">
-              <a href="#">Sign Up</a>
+            <div class="link">
+              <button type="submit" class="signup" data-operation="register">
+                Sign Up
+              </button>
             </div>
           </form>
         </div>
+      </div>
+
+      <div class="status-popup">
+        <h4 id="status-message"></h4>
       </div>
     </main>
   </body>

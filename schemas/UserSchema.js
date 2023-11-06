@@ -1,13 +1,11 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-// Define your schemas and models here
 const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   name: {
     type: String,
     required: true,
     unique: true,
-    maxlength: 20,
   },
   password: {
     type: String,
@@ -23,4 +21,4 @@ const UserSchema = new Schema({
 });
 
 const User = mongoose.model("User", UserSchema);
-export default mongoose.models.User || User;
+module.exports = mongoose.models.User || User;

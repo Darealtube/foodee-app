@@ -8,6 +8,7 @@ body {
   background-image: url(../public/images/backdrop-03.png);
   background-size: 1800px 1800px;
   height: 100vh;
+  overflow-y: hidden;
 }
 
 h1 {
@@ -187,7 +188,8 @@ form input:focus {
   gap: 15px;
 }
 
-.link .login {
+.link .login,
+.link .signup {
   border: none;
   outline: none;
   cursor: pointer;
@@ -200,7 +202,8 @@ form input:focus {
   transition: 0.2s ease;
 }
 
-.link .login:hover {
+.link .login:hover,
+.link .signup:hover {
   background: #3b7e2e;
 }
 
@@ -243,4 +246,23 @@ hr {
 
 .button a:hover {
   background: #3b7e2e;
+}
+
+.status-popup {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  transform: translateY(200px);
+  transition: all 250ms ease-out;
+  width: auto;
+  padding: 16px;
+  padding-bottom: 32px;
+  height: 40px;
+  background-color: #f6f4e8;
+  color: #001011;
+  border-radius: 14px;
+}
+
+.popup-active {
+  transform: translateY(0);
 }

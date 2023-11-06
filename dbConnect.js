@@ -1,7 +1,7 @@
 const { default: mongoose } = require("mongoose");
 require("dotenv").config();
 
-// Replace 'YOUR_MONGODB_URI' with your actual MongoDB connection string
+// We use environment variables to keep the MongoDB URL link private
 const dbUri = process.env.MONGODB_URI;
 
 const connectDB = () => {
