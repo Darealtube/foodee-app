@@ -19,10 +19,12 @@ const postRoutes = require("./src/api/postRoutes.js");
 const profileRoutes = require("./src/api/profileRoutes.js");
 
 // Use those routes for the entire app
-// The other ones are commented out here because unless they are exporting a router, 
+// The other ones are commented out here because unless they are exporting a router,
 // it would throw an error saying that Router.use() expected a middleware but got an object
 
 app.use(loginRoute);
+app.use(postRoutes);
+app.use(categoryRoutes);
 /* app.use("/category", categoryRoutes);
 app.use("/comment", commentRoutes);
 app.use("/post", postRoutes);

@@ -10,11 +10,9 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
     />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-    />
     <link rel="stylesheet" href="./styles/index.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./scripts/index.js"></script>
   </head>
 
   <body>
@@ -58,127 +56,74 @@
 
     <main>
       <div class="container-tag">
-        <h1
+        <div
           style="
-            margin-top: 16px;
-            margin-left: 16px;
-            color: #f6f4e8;
-            font-family: 'Indie Flower';
+            flex-grow: 1;
+            padding-top: 8px;
+            padding-left: 8px;
+            padding-right: 8px;
           "
         >
-          Categories
-        </h1>
-        <div class="tag-list">
-          <!-- This is the list of all tags -->
-          <button class="tag">Affordable</button>
-          <button class="tag">Burger</button>
-          <button class="tag">Cheesy</button>
-          <button class="tag">Donuts</button>
-          <button class="tag">Fries</button>
-          <button class="tag">Mexican</button>
-          <button class="tag">Savory</button>
-          <button class="tag">Snacks</button>
-          <button class="tag">Sweets</button>
-          <button class="tag">Tacos</button>
-          <!-- This is the list of all tags -->
+          <div style="display: flex; align-items: center">
+            <h1
+              style="color: #f6f4e8; font-family: 'Indie Flower'; flex-grow: 1"
+            >
+              Categories
+            </h1>
+            <span class="material-symbols-outlined prev-cats">
+              arrow_back
+            </span>
+            <span class="material-symbols-outlined next-cats">
+              arrow_forward
+            </span>
+          </div>
+
+          <div class="tag-list">
+            <!-- Loading tags -->
+            <button class="loading-tag"></button>
+            <button class="loading-tag"></button>
+            <button class="loading-tag"></button>
+            <button class="loading-tag"></button>
+            <button class="loading-tag"></button>
+            <!-- Loading tags -->
+          </div>
+        </div>
+
+        <h1 style="color: #f6f4e8; font-family: 'Indie Flower'; margin-left: 8px;">Posts</h1>
+        <div class="post-filter-options">
+          <span
+            style="
+              display: flex;
+              align-items: center;
+              flex-grow: 1;
+              margin-left: 8px;
+            "
+          >
+            <h3 style="margin-right: 8px">Sort By:</h3>
+            <select class="post-filter">
+              <option value="date">Date</option>
+              <option value="likes">Likes</option>
+            </select>
+          </span>
+
+          <span class="material-symbols-outlined prev-page"> arrow_back </span>
+          <span class="material-symbols-outlined next-page">
+            arrow_forward
+          </span>
         </div>
       </div>
 
-      <!-- This is the list of all containers -->
-      <!------------------------------------------------------------------>
-      <div class="container">
-        <header class="food-img">
-          <a href="./dummy/food/food1.html">
-            <img src="./public/images/placeholder-pic-01.jpg" alt="Food pic" />
-          </a>
-        </header>
-        <footer class="food-details">
-          <div class="food-details-container">
-            <div class="food-tags">
-              <button class="tag-post">Burger</button>
-              <button class="tag-post">Savory</button>
-            </div>
-            <p class="like-count">123</p>
-            <div class="material-symbols-outlined like">favorite</div>
-          </div>
-        </footer>
-      </div>
-
-      <!------------------------------------------------------------------>
-      <div class="container">
-        <header class="food-img">
-          <a href="./dummy/food/food2.html">
-            <img src="./public/images/placeholder-pic-02.jpg" alt="Food pic" />
-          </a>
-        </header>
-        <footer class="food-details">
-          <div class="food-details-container">
-            <div class="food-tags">
-              <button class="tag-post">Cheesy</button>
-              <button class="tag-post">Affordable</button>
-            </div>
-            <p class="like-count">123</p>
-            <div class="material-symbols-outlined like">favorite</div>
-          </div>
-        </footer>
-      </div>
-      <!------------------------------------------------------------------>
-      <div class="container">
-        <header class="food-img">
-          <a href="./dummy/food/food3.html">
-            <img src="./public/images/placeholder-pic-03.jpg" alt="Food pic" />
-          </a>
-        </header>
-        <footer class="food-details">
-          <div class="food-details-container">
-            <div class="food-tags">
-              <button class="tag-post">Fries</button>
-              <button class="tag-post">Snacks</button>
-            </div>
-            <p class="like-count">123</p>
-            <div class="material-symbols-outlined like">favorite</div>
-          </div>
-        </footer>
-      </div>
-      <!------------------------------------------------------------------>
-      <div class="container">
-        <header class="food-img">
-          <a href="./dummy/food/food4.html">
-            <img src="./public/images/placeholder-pic-04.jpg" alt="Food pic" />
-          </a>
-        </header>
-        <footer class="food-details">
-          <div class="food-details-container">
-            <div class="food-tags">
-              <button class="tag-post">Tacos</button>
-              <button class="tag-post">Mexican</button>
-            </div>
-            <p class="like-count">123</p>
-            <div class="material-symbols-outlined like">favorite</div>
-          </div>
-        </footer>
-      </div>
-      <!------------------------------------------------------------------>
-      <div class="container">
-        <header class="food-img">
-          <a href="./dummy/food/food5.html">
-            <img src="./public/images/placeholder-pic-05.jpg" alt="Food pic" />
-          </a>
-        </header>
-        <footer class="food-details">
-          <div class="food-details-container">
-            <div class="food-tags">
-              <button class="tag-post">Donuts</button>
-              <button class="tag-post">Sweets</button>
-            </div>
-            <p class="like-count">123</p>
-            <div class="material-symbols-outlined like">favorite</div>
-          </div>
-        </footer>
-      </div>
-      <!------------------------------------------------------------------>
-      <!-- This is the list of all containers -->
+      <!-- Loading containers -->
+      <div class="loading-container"></div>
+      <div class="loading-container"></div>
+      <div class="loading-container"></div>
+      <div class="loading-container"></div>
+      <div class="loading-container"></div>
+      <!-- Loading containers -->
     </main>
-    <script src="./scripts/index.js"></script>
+
+    <div class="status-popup">
+      <h4 id="status-message"></h4>
+    </div>
   </body>
 </html>

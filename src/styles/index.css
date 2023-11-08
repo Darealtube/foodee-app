@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto:wght@400;500;700&display=swap");
 @import "similar-styles.css";
 
-
 main {
   display: flex;
   flex-wrap: wrap;
@@ -62,6 +61,8 @@ form.search::after {
 }
 
 .container-tag {
+  display: flex;
+  flex-direction: column;
   background-image: url(../public/images/backdrop-01.png);
   background-size: 300px 300px;
   box-shadow: 4px 4px 6px gray;
@@ -79,10 +80,11 @@ form.search::after {
   box-shadow: 8px 8px 6px gray;
 }
 
-.tag-list button {
+.tag-list .tag,
+.tag-list .tag-focused,
+.tag-list .loading-tag {
   font-family: "Indie Flower";
   font-weight: bold;
-  background-color: #bacec1;
   font-size: 10px;
   width: 70px;
   height: 24px;
@@ -100,7 +102,7 @@ form.search::after {
   transition: 0.5s;
 }
 
-.tag-list button:hover {
+.tag-list .tag:hover {
   background-color: #e59560;
   color: #1d3124;
   font-size: 12px;
@@ -108,11 +110,14 @@ form.search::after {
   cursor: pointer;
 }
 
-.tag-list button:active {
+.tag-list .tag:active {
   transition: 0.2s;
   opacity: 0.7;
 }
 
+.tag-focused {
+  background-color: #e59560;
+}
 
 .tags {
   display: flex;
@@ -127,7 +132,86 @@ form.search::after {
   width: 100%;
 }
 
-.tag-list .tag {
+.tag-list .tag,
+.tag-list .loading-tag {
   margin-top: 8px;
 }
 
+.post-filter-options {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  color: #f6f4e8;
+  font-family: "Indie Flower";
+}
+
+.prev-page,
+.next-page,
+.prev-cats,
+.next-cats {
+  user-select: none;
+  cursor: pointer;
+  margin-right: 8px;
+  color: #f6f4e8;
+  transition: color 250ms ease-in-out;
+}
+
+.prev-page:hover,
+.next-page:hover,
+.prev-cats:hover,
+.next-cats:hover {
+  color: #e59560;
+}
+
+.post-filter {
+  outline: none;
+  color: inherit;
+  background: inherit;
+  height: 100%;
+  width: 40%;
+  border: 0;
+  border-bottom: 2px solid;
+  font-size: 16px;
+}
+
+.loading-tag {
+  width: 32px;
+  height: 16px;
+  animation: loading-tag 2000ms infinite;
+}
+
+.loading-container {
+  width: 100%;
+  max-width: 400px;
+  height: 400px;
+  max-height: 400px;
+  animation: loading 2000ms infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-color: #bacec1;
+  }
+
+  50% {
+    background-color: #1d3124;
+  }
+
+  100% {
+    background-color: #bacec1;
+  }
+}
+
+@keyframes loading-tag {
+  0% {
+    background-color: #f6f4e8;
+  }
+
+  50% {
+    background-color: #e59560;
+  }
+
+  100% {
+    background-color: #f6f4e8;
+  }
+}

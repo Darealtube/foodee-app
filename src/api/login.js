@@ -29,7 +29,7 @@ router.post("/api/login", async (req, res) => {
           }
         });
       }
-    // If the user is trying to register,
+      // If the user is trying to register,
     } else if (operation === "register") {
       // And there is already an existing user with the name,
       if (existingUser) {
