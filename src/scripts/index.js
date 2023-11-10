@@ -9,6 +9,8 @@ $(document).ready(() => {
   let page = urlQuery.get("p") || 0;
   let endPage;
 
+  const likedPosts = new Set();
+
   // Shows the loading containers when the content is loading
   const showLoading = () => {
     $("main .loading-container").show();
@@ -21,8 +23,10 @@ $(document).ready(() => {
 
   // Generates a string HTML that will be converted to an actual element later on
   const generatePost = (postData) => {
+    const isLiked = likedPosts.has(postData._id);
+    const postLikes = isLiked ? postData.likes + 1 : postData.likes;
     return `
-    <div class="container">
+    <div class="container" id="${postData._id}">
     <header class="food-img">
       <a href="/food?=${postData._id}">
         <img src="${postData.post_img}" alt="Food pic" />
@@ -33,8 +37,10 @@ $(document).ready(() => {
         <div class="food-tags"> 
             ${generateTags(postData.categories)}
         </div>
-        <p class="like-count">${postData.likes}</p>
-        <div class="material-symbols-outlined like">favorite</div>
+        <p class="like-count">${postLikes}</p>
+        <div class="material-symbols-outlined like ${
+          isLiked ? "liked" : ""
+        }">favorite</div>
       </div>
     </footer>
   </div>
@@ -263,6 +269,44 @@ $(document).ready(() => {
         const data = categoryData[catPage];
         appendTags(data);
       }
+    }
+  });
+
+  // Likes
+  const likePost = (postId, operation) => {
+    $.ajax({
+      method: "PUT",
+      url: `/api/posts`,
+      cache: true,
+      data: JSON.stringify({ post: postId, operation }),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      error: ({ responseJSON }) => {
+        hideLoading();
+        // Show the status popup saying that the login/signup has failed
+        $(".status-popup").addClass("popup-active");
+        $("#status-message").text(responseJSON.error);
+        setTimeout(() => {
+          $(".status-popup").removeClass("popup-active");
+        }, 2000);
+      },
+    });
+  };
+
+  $("main").on("click", ".container .like", function () {
+    const postId = $(this).closest(".container").attr("id");
+    const postLikes = $(`#${postId} .like-count`).text();
+
+    if (!likedPosts.has(postId)) {
+      likedPosts.add(postId);
+      $(this).css("color", "red");
+      $(`#${postId} .like-count`).text(parseInt(postLikes) + 1);
+      likePost(postId, "like");
+    } else {
+      likedPosts.delete(postId);
+      $(this).css("color", "#f6f4e8");
+      $(`#${postId} .like-count`).text(parseInt(postLikes) - 1);
+      likePost(postId, "dislike");
     }
   });
 });

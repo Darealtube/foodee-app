@@ -163,6 +163,10 @@ form.search::after {
   color: #e59560;
 }
 
+.liked {
+  color: red;
+}
+
 .post-filter {
   outline: none;
   color: inherit;

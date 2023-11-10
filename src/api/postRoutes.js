@@ -1,4 +1,5 @@
 const Post = require("../../schemas/PostSchema");
+const Like = require("../../schemas/LikesSchema");
 const express = require("express");
 const router = express.Router();
 
@@ -20,9 +21,30 @@ router.get("/api/posts", async (req, res) => {
       .sort(filter === "date" ? { date_created: -1 } : { likes: -1 });
     res.json(posts).status(200);
   } catch (error) {
+    res.status(500).json({ error: "An error occured while fetching posts." });
+  }
+});
+
+router.put("/api/posts", async (req, res) => {
+  let post = req.body.post; // POST ID
+  let user = req.body.user;
+  let operation = req.body.operation;
+
+  try {
+    if (operation === "like") {
+      // If like operation,
+      await Like.create({ user: "Darryl Javier", post }); // Darryl Javier for now because there's not yet session management
+      await Post.updateOne({ _id: post }, { $inc: { likes: 1 } });
+    } else if (operation === "dislike") {
+      // If dislike operation,
+      await Like.deleteOne({ user: "Darryl Javier", post }); // Darryl Javier for now because there's not yet session management
+      await Post.updateOne({ _id: post }, { $inc: { likes: -1 } });
+    } else {
+    }
+  } catch (error) {
     res
       .status(500)
-      .json({ error: "An error occured while fetching your post." });
+      .json({ error: "An error occured while updating the post." });
   }
 });
 
