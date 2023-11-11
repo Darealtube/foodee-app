@@ -26,6 +26,7 @@ app.use(loginRoute);
 app.use(postRoutes);
 app.use(categoryRoutes);
 app.use(commentRoutes);
+app.use(profileRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
