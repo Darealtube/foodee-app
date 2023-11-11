@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 const CommentSchema = new Schema({
-  author: mongoose.Schema.Types.ObjectId,
+  author: String,
   post: mongoose.Schema.Types.ObjectId,
   date_created: {
     type: Date,
@@ -16,4 +16,4 @@ const CommentSchema = new Schema({
 });
 
 const Comment = mongoose.model("Comment", CommentSchema);
-module.exports =  mongoose.models.Comment || Comment;
+module.exports = mongoose.models.Comment || Comment;

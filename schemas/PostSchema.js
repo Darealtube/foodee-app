@@ -20,9 +20,12 @@ const PostSchema = new Schema({
     type: Date,
     default: Date.now, // Remember to use Date.now instead of Date.now() so that everytime mongo creates, it executes the function rather than putting the same date in every data
   },
-  likes: Number,
-  author: String,
-  categories: [String],
+  likes: {
+    type: Number,
+    default: 0,
+  },
+  author: { type: String, required: true },
+  categories: { type: [String], required: true },
 });
 
 const Post = mongoose.model("Post", PostSchema);

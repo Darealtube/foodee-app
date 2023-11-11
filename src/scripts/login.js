@@ -34,7 +34,7 @@ $(document).ready(function () {
         }, 2000);
       },
       // Use destructuring to destructure the error parameter to get the responseJSON data
-      error: ({responseJSON}) => {
+      error: ({ responseJSON }) => {
         // Show the status popup saying that the login/signup has failed
         $(".status-popup").addClass("popup-active");
         $("#status-message").text(responseJSON.error);

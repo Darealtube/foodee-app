@@ -25,10 +25,7 @@ const profileRoutes = require("./src/api/profileRoutes.js");
 app.use(loginRoute);
 app.use(postRoutes);
 app.use(categoryRoutes);
-/* app.use("/category", categoryRoutes);
-app.use("/comment", commentRoutes);
-app.use("/post", postRoutes);
-app.use("/profile", profileRoutes); */
+app.use(commentRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

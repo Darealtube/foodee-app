@@ -274,9 +274,11 @@ $(document).ready(() => {
 
   // Likes
   const likePost = (postId, operation) => {
+    const apiRoute =
+      operation === "like" ? "/api/posts/like" : "/api/posts/dislike";
     $.ajax({
       method: "PUT",
-      url: `/api/posts`,
+      url: apiRoute,
       cache: true,
       data: JSON.stringify({ post: postId, operation }),
       contentType: "application/json; charset=utf-8",
