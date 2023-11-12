@@ -84,57 +84,6 @@ $(document).ready(() => {
     });
   };
 
-  //------------This is my code for authentication for add posts when logged in not completed yet---------------------//
-  const getPosts = () => {
-    showLoading();
-  
-    // ------------ Edit this part out for the logic if the user is logged in ------------------------------------------//
-    const isUserLoggedIn = () => {
-      return false;
-    };
-  
-    // Get the "add post" link element
-    const addPostLink = document.getElementById('addPostLink');
-  
-    // Add a click event listener to the "add post" link
-    addPostLink.addEventListener('click', function (event) {
-      // Check if the user is not logged in
-      if (!isUserLoggedIn()) {
-        // Prevent the default behavior of the link (opening the create post page)
-        event.preventDefault();
-  
-        // Redirect the user to the login page
-        window.location.href = './login.html';
-        return; // Stop further execution of the getPosts function
-      }
-    });
-  
-    $.ajax({
-      method: "GET",
-      url: `/api/posts?p=${page}&f=${filter}&${category && `c=${category}`}`,
-      cache: true,
-      contentType: "application/json; charset=utf-8",
-      dataType: "json",
-      success: (data) => {
-        hideLoading();
-        if (data.length < 5) endPage = page;
-        if (filter == "date") {
-          postData[page] = data;
-        } else postLikesData[page] = data;
-        appendPosts(data);
-      },
-      error: ({ responseJSON }) => {
-        hideLoading();
-        // Show the status popup saying that the login/signup has failed
-        $(".status-popup").addClass("popup-active");
-        $("#status-message").text(responseJSON.error);
-        setTimeout(() => {
-          $(".status-popup").removeClass("popup-active");
-        }, 2000);
-      },
-    });
-  };
-  //-------------------------------------------------------------------------------------//
 
   // Removes all the current post elements in the post container
   const resetPosts = () => {
