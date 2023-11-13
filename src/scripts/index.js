@@ -84,7 +84,6 @@ $(document).ready(() => {
     });
   };
 
-
   // Removes all the current post elements in the post container
   const resetPosts = () => {
     $("main").find(".container").remove();

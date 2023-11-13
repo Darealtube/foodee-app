@@ -1,6 +1,7 @@
 const User = require("../../schemas/UserSchema");
 const express = require("express");
 const bcrypt = require("bcrypt"); // bcrypt is what we use to hash our passwords
+var jwt = require("jsonwebtoken"); // For JWT authentication
 const router = express.Router();
 const saltRounds = 12; // 12 salt rounds for an overkill password hashing
 
@@ -25,6 +26,20 @@ router.post("/api/login", async (req, res) => {
           if (error || !result) {
             res.status(401).json({ error: "Login failed. Wrong credentials." });
           } else {
+            // Create a JWT Token for the user's name to be used for authentication and session management
+            const token = jwt.sign(
+              { name: existingUser.name },
+              process.env.JWT_SECRET,
+              {
+                expiresIn: 60 * 60 * 24 * 7,
+              }
+            );
+            // Put that token inside a cookie. The cookie key is "session" and the value is the user's name.
+            res.cookie("session", token, {
+              httpOnly: true,
+              secure: true,
+              maxAge: 60 * 60 * 24 * 7, // One week
+            });
             res.status(200).json(existingUser);
           }
         });
@@ -39,6 +54,16 @@ router.post("/api/login", async (req, res) => {
         const salt = await bcrypt.genSalt(saltRounds);
         const hashedPassword = await bcrypt.hash(password, salt);
         const newUser = await User.create({ name, password: hashedPassword });
+        // Create a JWT Token for the user's name to be used for authentication and session management
+        const token = jwt.sign({ name: newUser.name }, process.env.JWT_SECRET, {
+          expiresIn: 60 * 60 * 24 * 7,
+        });
+        // Put that token inside a cookie
+        res.cookie("session", token, {
+          httpOnly: true,
+          secure: true,
+          maxAge: 60 * 60 * 24 * 7, // One week
+        });
         res.status(201).json(newUser);
       }
     } else {
@@ -50,5 +75,26 @@ router.post("/api/login", async (req, res) => {
       .json({ error: "An error occurred while processing the request." });
   }
 });
+
+// This clears the session cache and effectively logs out the user.
+router.post(
+  "/api/logout",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    if (req.user) {
+      res.clearCookie("session");
+      res.status(200).json({ message: "Logged out successfully." });
+    }
+  }
+);
+
+// This gets the current logged in user data.
+router.get(
+  "/api/session",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.json(req.user).status(200);
+  }
+);
 
 module.exports = router;

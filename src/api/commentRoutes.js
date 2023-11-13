@@ -44,32 +44,56 @@ router.post("/api/comments", async (req, res) => {
 });
 
 // Updates the message of a comment on a post (PROVEN TO WORK PROPERLY)
-router.put("/api/comments", async (req, res) => {
-  let comment = req.body.comment;
-  let message = req.body.message;
+router.put(
+  "/api/comments",
+  passport.authenticate("jwt", { session: false }), // Add this to add an authentication layer to the API. It checks if the user is logged in.
+  async (req, res) => {
+    let commentID = req.body.comment; // Comment ID
+    let message = req.body.message;
 
-  try {
-    await Comment.updateOne({ _id: comment, message });
-    res.json({ message: "Comment updated successfully." }).status(200);
-  } catch (error) {
-    res
-      .status(500)
-      .json({ error: "An error occured while updating your comment." });
+    try {
+      const comment = Comment.findById(commentID);
+
+      if (comment.author != req.user.name) {
+        res
+          .status(401)
+          .json({ error: "You are not allowed to edit this comment." });
+      }
+
+      await Comment.updateOne({ _id: commentID, message });
+      res.json({ message: "Comment updated successfully." }).status(200);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ error: "An error occured while updating your comment." });
+    }
   }
-});
+);
 
 // Deletes a comment on a post (PROVEN TO WORK PROPERLY)
-router.delete("/api/comments", async (req, res) => {
-  let comment = req.body.comment;
+router.delete(
+  "/api/comments",
+  passport.authenticate("jwt", { session: false }), // Add this to add an authentication layer to the API. It checks if the user is logged in.
+  async (req, res) => {
+    let commentID = req.body.comment;
 
-  try {
-    await Comment.deleteOne({ _id: comment });
-    res.json({ message: "Comment deleted successfully." }).status(200);
-  } catch (error) {
-    res
-      .status(500)
-      .json({ error: "An error occured while deleting your comment." });
+    try {
+      const comment = Comment.findById(commentID);
+
+      if (comment.author != req.user.name) {
+        res
+          .status(401)
+          .json({ error: "You are not allowed to edit this comment." });
+      }
+
+      await Comment.deleteOne({ _id: commentID });
+      res.json({ message: "Comment deleted successfully." }).status(200);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ error: "An error occured while deleting your comment." });
+    }
   }
-});
+);
 
 module.exports = router;

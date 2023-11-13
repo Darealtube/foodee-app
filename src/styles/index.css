@@ -34,7 +34,6 @@ form.search input[type="text"] {
   border: none;
   float: left;
   width: 80%;
-  margin-right: 10px;
 }
 
 form.search button {
@@ -45,29 +44,20 @@ form.search button {
   color: #1d3124;
   border: none;
   cursor: pointer;
-  transition: 0.3s ease-in-out;
+  transition: 1s;
 }
 
-form.search button:hover {
+form.search span:hover {
   transform: scale(1.2, 1.2);
   color: #3b7e2e;
   text-shadow: 1px 1px 1px gray;
+  transition: 0.5s;
 }
 
 form.search::after {
   content: "";
   clear: both;
   display: table;
-}
-
-#add-button {
-  transition: 0.3s ease-in-out;
-}
-
-#add-button:hover {
-  transform: scale(1.2, 1.2);
-  color: #3b7e2e;
-  text-shadow: 1px 1px 1px gray;
 }
 
 .container-tag {
