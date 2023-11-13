@@ -1,7 +1,7 @@
 const User = require("../../schemas/UserSchema");
 const express = require("express");
 const router = express.Router();
-
+var passport = require("passport")
 // Gets the information of a single user profile (PROVEN TO WORK PROPERLY)
 router.get("/api/profile", async (req, res) => {
   let profile = req.query.p; // USER NAME
