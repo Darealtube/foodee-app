@@ -1,5 +1,7 @@
 const connectDB = require("./dbConnect.js");
 const express = require("express");
+const passport = require("passport");
+const cookieParser = require("cookie-parser");
 
 // Call the db connector
 connectDB();
@@ -8,6 +10,10 @@ const app = express();
 // Setup the middlewares, the express body parser and express.static("src") so that it would serve html files
 app.use(express.json());
 app.use(express.static("src"));
+app.use(cookieParser()); // Use cookieParses so we'll be able to get the cookie value from req
+
+require("./passportConfig.js")(passport); // Setup the passport authentication
+app.use(passport.initialize()); // Initialize passport
 
 const PORT = process.env.PORT || 3000;
 
