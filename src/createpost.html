@@ -36,12 +36,9 @@
     </header>
 
     <main>
-      <section class="food-main">
+      <div class="food-main">
         <!-- food image -->
         <form id="foodForm">
-          <section class="status-popup">
-            <h4 id="status-message"></h4>
-          </section>
           <div class="food-img">
             <img
               src=""
@@ -65,14 +62,14 @@
             <div class="author-details">
               <a href="./profile.html">
                 <img
-                  src="./public/images/pfp-02.png"
+                  src="./public/images/pfp-01.png"
                   alt="authorImg"
                   width="40px"
                   height="40px"
                   class="author-img"
                 />
               </a>  
-              <h1 class="author-name">Dave De Leon</h1>
+              <h1 class="author-name" id="author">Darryl Javier</h1>
             </div>
             
             <div class="food-description">
@@ -84,6 +81,10 @@
             <button type="submit" id="create_post">Create Post</button>
           </section>
         </form>
+      </div>
+
+      <section class="status-popup">
+        <h4 id="status-message"></h4>
       </section>
     </main>
   </body>

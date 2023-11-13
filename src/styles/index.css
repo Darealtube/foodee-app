@@ -34,6 +34,7 @@ form.search input[type="text"] {
   border: none;
   float: left;
   width: 80%;
+  margin-right: 10px;
 }
 
 form.search button {
@@ -58,6 +59,13 @@ form.search::after {
   content: "";
   clear: both;
   display: table;
+}
+
+#add-button:hover {
+  transform: scale(1.2, 1.2);
+  color: #3b7e2e;
+  text-shadow: 1px 1px 1px gray;
+  transition: 0.5s;
 }
 
 .container-tag {

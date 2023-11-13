@@ -325,3 +325,43 @@ input[type="text"] {
   outline: none;
   font-family: "Indie Flower";
 }
+
+button {
+  cursor: pointer;
+  background-color: #1d3124;
+  color: #f6f4e8;
+  font-family: "Indie Flower";
+  outline: none;
+  border: none;
+
+  height: 40px;
+  border-radius: 10%;
+  margin-left: 8px;
+  box-shadow: 3px 3px 6px #000;
+  transition: all 200ms ease-in-out;
+}
+
+button:hover {
+  box-shadow: 4px 4px 6px #000;
+  background-color: #001011;
+  color: #f6f4e8;
+}
+
+.status-popup {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  transform: translateY(200px);
+  transition: all 250ms ease-out;
+  width: auto;
+  padding: 16px;
+  padding-bottom: 32px;
+  height: 40px;
+  background-color: #f6f4e8;
+  color: #001011;
+  border-radius: 14px;
+}
+
+.popup-active {
+  transform: translateY(0);
+}
