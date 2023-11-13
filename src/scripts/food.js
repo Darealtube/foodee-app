@@ -7,7 +7,7 @@ $(document).ready(function () {
             caption: $("#description").val(),
             location: $("#location").val(),
             categories: $("#category").val().split(',').map(category => category.trim()),
-            user: $("#author").val()
+            user: $("#author").val().name()
         }
 
         $.ajax({
