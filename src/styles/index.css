@@ -45,14 +45,13 @@ form.search button {
   color: #1d3124;
   border: none;
   cursor: pointer;
-  transition: 1s;
+  transition: 0.3s ease-in-out;
 }
 
-form.search span:hover {
+form.search button:hover {
   transform: scale(1.2, 1.2);
   color: #3b7e2e;
   text-shadow: 1px 1px 1px gray;
-  transition: 0.5s;
 }
 
 form.search::after {
@@ -61,11 +60,14 @@ form.search::after {
   display: table;
 }
 
+#add-button {
+  transition: 0.3s ease-in-out;
+}
+
 #add-button:hover {
   transform: scale(1.2, 1.2);
   color: #3b7e2e;
   text-shadow: 1px 1px 1px gray;
-  transition: 0.5s;
 }
 
 .container-tag {
