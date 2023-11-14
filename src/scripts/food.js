@@ -1,4 +1,45 @@
+
 $(document).ready(function () {
+  var urlQuery = new URLSearchParams(window.location.search);
+  let postId = urlQuery.get("p") || 0;
+  // LOAD SINGLE POST
+  const getSinglePost = () => {
+    $.ajax({
+      method: "GET",
+      url: `/api/posts/${postId}`,
+      cache: true,
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (data) => {
+        console.log(data)
+
+        $(".food-img img").attr('src', data.post_img);
+        $(".author-name").text(data.name);
+
+        // not working
+        $(".author-details img").attr('src', data.authorpfp);
+        // -----------
+
+        $(".food-description").text(data.caption);
+        $(".food-location").text(data.location);
+
+        const date = data.date_created;
+        const formattedDate = date.toLocaleDateString('en-US', { month: 'numeric', day: 'numeric', year: 'numeric' });
+        $(".post-date").text(formattedDate);
+      },
+      error: () => {
+        console.error("error");
+      },
+    });
+  };
+  getSinglePost();
+
+  // EDIT POST
+  // $("#edit-post").click(function () {
+
+  // });
+  
+  // CREATE POST [in createpost.html]
   $("#foodForm").submit(function (event) {
     event.preventDefault();
 
