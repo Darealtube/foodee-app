@@ -3,6 +3,7 @@ const Like = require("../../schemas/LikesSchema");
 const Categories = require("../../schemas/CategorySchema");
 const passport = require("passport");
 const express = require("express");
+const jwt = require("jsonwebtoken");
 const router = express.Router();
 
 const postPerPage = 5; // This can be changed
@@ -31,10 +32,15 @@ router.get("/api/posts", async (req, res) => {
 // Get a single post (PROVEN TO WORK PROPERLY)
 router.get("/api/posts/:id", async (req, res) => {
   let postId = req.params.id; // POST ID
+  var loggedInUser = null;
   try {
+    if (req.cookies.session) {
+      loggedInUser = jwt.verify(req.cookies.session, process.env.JWT_SECRET);
+    }
+    const isLiked = await Like.exists({ user: loggedInUser.name });
     const post = await Post.findById(postId);
     const author = await User.findOne({ name: post.author });
-    res.json({ ...post, authorPFP: author.pfp }).status(200);
+    res.json({ ...post, authorPFP: author.pfp, isLiked }).status(200);
   } catch (error) {
     res
       .status(500)

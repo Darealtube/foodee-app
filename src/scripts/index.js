@@ -11,8 +11,6 @@ $(document).ready(() => {
   const postData = {}; // Hashmap for post data sorted by date
   const postLikesData = {}; // Hashmap for post data sorted by likes
 
-  const likedPosts = new Set();
-
   // Shows the loading containers when the content is loading
   const showLoading = () => {
     $("main .loading-container").show();
@@ -25,12 +23,10 @@ $(document).ready(() => {
 
   // Generates a string HTML that will be converted to an actual element later on
   const generatePost = (postData) => {
-    const isLiked = likedPosts.has(postData._id);
-    const postLikes = isLiked ? postData.likes + 1 : postData.likes;
     return `
     <div class="container" id="${postData._id}">
     <header class="food-img">
-      <a href="/food?p=${postData._id}">
+      <a href="/food.html?p=${postData._id}">
         <img src="${postData.post_img}" alt="Food pic" />
       </a>
     </header>
@@ -39,10 +35,10 @@ $(document).ready(() => {
         <div class="food-tags"> 
             ${generateTags(postData.categories)}
         </div>
-        <p class="like-count">${postLikes}</p>
-        <div class="material-symbols-outlined like ${
-          isLiked ? "liked" : ""
-        }">favorite</div>
+        <p class="like-count">${postData.likes}</p>
+        <span class="material-symbols-outlined">
+          favorite
+        </span>
       </div>
     </footer>
   </div>
@@ -278,48 +274,6 @@ $(document).ready(() => {
   });
 
   // END OF CATEGORY MANAGEMENT CODE
-
-  // START OF LIKING FUNCTIONALITY
-  const likePost = (postId, operation) => {
-    const apiRoute =
-      operation === "like" ? "/api/posts/like" : "/api/posts/dislike";
-    $.ajax({
-      method: "PUT",
-      url: apiRoute,
-      cache: true,
-      data: JSON.stringify({ post: postId, operation }),
-      contentType: "application/json; charset=utf-8",
-      dataType: "json",
-      error: ({ responseJSON }) => {
-        hideLoading();
-        // Show the status popup saying that the login/signup has failed
-        $(".status-popup").addClass("popup-active");
-        $("#status-message").text(responseJSON.error);
-        setTimeout(() => {
-          $(".status-popup").removeClass("popup-active");
-        }, 2000);
-      },
-    });
-  };
-
-  $("main").on("click", ".container .like", function () {
-    const postId = $(this).closest(".container").attr("id");
-    const postLikes = $(`#${postId} .like-count`).text();
-
-    if (!likedPosts.has(postId)) {
-      likedPosts.add(postId);
-      $(this).css("color", "red");
-      $(`#${postId} .like-count`).text(parseInt(postLikes) + 1);
-      likePost(postId, "like");
-    } else {
-      likedPosts.delete(postId);
-      $(this).css("color", "#f6f4e8");
-      $(`#${postId} .like-count`).text(parseInt(postLikes) - 1);
-      likePost(postId, "dislike");
-    }
-  });
-
-  // END OF LIKING FUNCTIONALITY
 
   // START OF APPBAR
   const appBar = (loggedInUser) => {
