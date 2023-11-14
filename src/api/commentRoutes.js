@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 const commentPerPage = 10; // This can be changed
-
+var passport = require("passport")
 // Displays all comments on a post (PROVEN TO WORK PROPERLY)
 router.get("/api/comments", async (req, res) => {
   // Get the post (p) id in the request url parameter
