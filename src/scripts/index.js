@@ -341,4 +341,27 @@ $(document).ready(() => {
     logout();
   });
   // END OF LOGOUT
+
+  $("input[name='search-bar']").on("keyup", function() {
+    const val = $(this).val();
+    if (val.trim() !== "") {
+      $.ajax({
+        url: "/api/searchCategories",
+        type: "GET",
+        data: { k: val },
+        success: function(response) {
+          $(".search-results").empty();
+          response.forEach(function(category) {
+            $(".search-results").append($("<div>").append($("<a>").attr("href","/index.html?p=0&f=date&c=${category.query}").text(category.name)));
+          });
+        },
+        error: function() {
+          $(".search-results").empty();
+          $(".search-results").append($("<div>").text("Error occured."));
+        }
+      });
+    } else {
+      $(".search-results").empty();
+    }
+  });
 });
