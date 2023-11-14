@@ -218,13 +218,6 @@ main {
   white-space: pre-wrap;
 }
 
-.comment-button {
-  background-color: inherit;
-  outline: none;
-  border: none;
-  cursor: pointer;
-}
-
 .comment-msg {
   font-family: Roboto;
 }
@@ -333,18 +326,10 @@ button {
   font-family: "Indie Flower";
   outline: none;
   border: none;
-
   height: 40px;
   border-radius: 10%;
   margin-left: 8px;
-  box-shadow: 3px 3px 6px #000;
   transition: all 200ms ease-in-out;
-}
-
-button:hover {
-  box-shadow: 4px 4px 6px #000;
-  background-color: #001011;
-  color: #f6f4e8;
 }
 
 .status-popup {
@@ -378,8 +363,37 @@ button:hover {
 #add_photo{
   transition: 0.3s ease-in-out;
 }
+
 #add_photo:hover {
   transform: scale(1.2, 1.2);
   color: #3b7e2e;
   text-shadow: 1px 1px 1px gray;
+}
+
+#add-button {
+  transition: 0.3s ease-in-out;
+}
+
+#add-button:hover {
+  transform: scale(1.2, 1.2);
+  color: #3b7e2e;
+  text-shadow: 1px 1px 1px gray;
+}
+
+#send-button {
+  transition: 0.3s ease-in-out;
+}
+
+#send-button:hover {
+  transform: scale(1.2, 1.2);
+  color: #3b7e2e;
+  text-shadow: 1px 1px 1px gray;
+}
+
+#create_post {
+  transition: 0.3s ease-in-out;
+}
+
+#create_post:hover {
+  color: #3b7e2e;
 }
