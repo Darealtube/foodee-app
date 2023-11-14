@@ -398,7 +398,7 @@ $(document).ready(() => {
         success: function(response) {
           $(".search-results").empty();
           response.forEach(function(category) {
-            $(".search-results").append($("<div>").text(category.name));
+            $(".search-results").append($("<div>").append($("<a>").attr("href","/index.html?p=0&f=date&c=${category.query}").text(category.name)));
           });
         },
         error: function() {
