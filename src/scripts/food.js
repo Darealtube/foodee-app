@@ -17,15 +17,16 @@ $(document).ready(function () {
         $(".author-name").text(data.name);
 
         // not working
-        $(".author-details img").attr('src', data.authorpfp);
+        $(".author-details img").attr('src', data.authorPFP);
         // -----------
 
         $(".food-description").text(data.caption);
         $(".food-location").text(data.location);
 
-        const date = data.date_created;
-        const formattedDate = date.toLocaleDateString('en-US', { month: 'numeric', day: 'numeric', year: 'numeric' });
-        $(".post-date").text(formattedDate);
+        const fullDate = data.date_created;
+        const dateOnly = fullDate.split('T')[0]; // Extract the date portion
+
+        $(".post-date").text(dateOnly);
       },
       error: () => {
         console.error("error");
@@ -33,6 +34,8 @@ $(document).ready(function () {
     });
   };
   getSinglePost();
+
+  // GET COMMENTS
 
   // EDIT POST
   // $("#edit-post").click(function () {
