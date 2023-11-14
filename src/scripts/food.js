@@ -54,7 +54,7 @@ $(document).ready(function () {
         .val()
         .split(",")
         .map((category) => category.trim()),
-      user: $("#author").val().name(),
+      user: $("#author").val().name,
     };
 
     $.ajax({

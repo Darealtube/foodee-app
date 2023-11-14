@@ -389,3 +389,11 @@ button {
   color: #3b7e2e;
   text-shadow: 1px 1px 1px gray;
 }
+
+#create_post {
+  transition: 0.3s ease-in-out;
+}
+
+#create_post:hover {
+  color: #3b7e2e;
+}
