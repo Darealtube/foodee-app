@@ -30,7 +30,7 @@ $(document).ready(() => {
     return `
     <div class="container" id="${postData._id}">
     <header class="food-img">
-      <a href="/food?=${postData._id}">
+      <a href="/food?p=${postData._id}">
         <img src="${postData.post_img}" alt="Food pic" />
       </a>
     </header>

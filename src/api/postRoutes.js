@@ -33,7 +33,8 @@ router.get("/api/posts/:id", async (req, res) => {
   let postId = req.params.id; // POST ID
   try {
     const post = await Post.findById(postId);
-    res.json(post).status(200); 
+    const author = await User.findOne({ name: post.author });
+    res.json({ ...post, authorPFP: author.pfp }).status(200);
   } catch (error) {
     res
       .status(500)
