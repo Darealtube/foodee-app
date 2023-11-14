@@ -4,6 +4,8 @@ const Categories = require("../../schemas/CategorySchema");
 const passport = require("passport");
 const express = require("express");
 const jwt = require("jsonwebtoken");
+const cloudinary = require("../../imageUploader");
+const upload = require("../../multer");
 const router = express.Router();
 
 const postPerPage = 5; // This can be changed
@@ -17,9 +19,9 @@ router.get("/api/posts", async (req, res) => {
 
   try {
     // The $in aggregate checks if the categories array has atleast one of its categories equal to the category parameter. It only does this check if there is a category on the url parameter.
-    
+
     const posts = await Post.find(
-      category && { categories: { $regex: category, $options: "i"} }
+      category && { categories: { $regex: category, $options: "i" } }
     )
       .skip(pageOffset)
       .limit(postPerPage)
@@ -162,18 +164,29 @@ router.put(
 // Create a post using POST method (PROVEN TO WORK PROPERLY)
 router.post(
   "/api/posts",
-  passport.authenticate("jwt", { session: false }), // Add this to add an authentication layer to the API. It checks if the user is logged in.
+  passport.authenticate("jwt", { session: false }),
+  upload.any(), // Add this to add an authentication layer to the API. It checks if the user is logged in.
   async (req, res) => {
     let author = req.user; // Logged in user
-    const { post_img, caption, location, categories } = req.body;
+    const { caption, location, categories } = req.body;
+    const { buffer, mimetype } = req.files[0];
+
+    const b64 = Buffer.from(buffer).toString("base64");
+    let dataURI = "data:" + mimetype + ";base64," + b64;
 
     try {
+      const result = await cloudinary.uploader.upload(dataURI, {
+        resource_type: "auto",
+        upload_preset: "ml_default",
+        folder: "foodee",
+      });
+
       await Post.create({
-        post_img,
+        post_img: result.secure_url,
         caption,
         location,
         categories,
-        author,
+        author: author.name,
       });
 
       for (let i = 0; i < categories.length; ++i) {

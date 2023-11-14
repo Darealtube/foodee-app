@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
   var urlQuery = new URLSearchParams(window.location.search);
   let postId = urlQuery.get("p") || 0;
@@ -11,20 +10,20 @@ $(document).ready(function () {
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       success: (data) => {
-        console.log(data)
+        console.log(data);
 
-        $(".food-img img").attr('src', data.post_img);
+        $(".food-img img").attr("src", data.post_img);
         $(".author-name").text(data.name);
 
         // not working
-        $(".author-details img").attr('src', data.authorPFP);
+        $(".author-details img").attr("src", data.authorPFP);
         // -----------
 
         $(".food-description").text(data.caption);
         $(".food-location").text(data.location);
 
         const fullDate = data.date_created;
-        const dateOnly = fullDate.split('T')[0]; // Extract the date portion
+        const dateOnly = fullDate.split("T")[0]; // Extract the date portion
 
         $(".post-date").text(dateOnly);
       },
@@ -41,47 +40,6 @@ $(document).ready(function () {
   // $("#edit-post").click(function () {
 
   // });
-  
-  // CREATE POST [in createpost.html]
-  $("#foodForm").submit(function (event) {
-    event.preventDefault();
-
-    const postData = {
-      post_img: $("#input-file").val(),
-      caption: $("#description").val(),
-      location: $("#location").val(),
-      categories: $("#category")
-        .val()
-        .split(",")
-        .map((category) => category.trim()),
-      user: $("#author").val().name,
-    };
-
-    $.ajax({
-      method: "POST",
-      url: "/api/posts",
-      data: JSON.stringify(postData),
-      contentType: "application/json; charset=utf-8",
-      dataType: "json",
-      success: (data, status) => {
-        $(".status-popup").addClass("popup-active");
-        $("#status-message").text(
-          "Your post was created! Redirecting to homepage..."
-        );
-        setTimeout(() => {
-          window.location.href = "/index.html";
-          $(".status-popup").removeClass("popup-active");
-        }, 2000);
-      },
-      error: ({ responseJSON }) => {
-        $(".status-popup").addClass("popup-active");
-        $("#status-message").text(responseJSON.error);
-        setTimeout(() => {
-          $(".status-popup").removeClass("popup-active");
-        }, 2000);
-      },
-    });
-  });
 
   // START OF APPBAR
   const appBar = (loggedInUser) => {
