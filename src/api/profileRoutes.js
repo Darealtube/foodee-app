@@ -63,24 +63,6 @@ router.delete(
   }
 );
 
-// Get all posts of a user profile (PROVEN TO WORK PROPERLY)
-router.get("/api/posts/:profile", async (req, res) => {
-  let profile = req.params.profile; // PROFILE NAME
-  let pageOffset = (parseInt(req.query.p) || 0) * postPerPage;
-  let filter = req.query.f || "date";
-  try {
-    const posts = await Post.find({ author: profile })
-      .skip(pageOffset)
-      .limit(postPerPage)
-      .sort(filter === "date" ? { date_created: -1 } : { likes: -1 });
-
-    res.json(posts).status(200);
-  } catch (error) {
-    res
-      .status(500)
-      .json({ error: "An error occurred while fetching the posts." });
-  }
-});
 
 
 module.exports = router;
