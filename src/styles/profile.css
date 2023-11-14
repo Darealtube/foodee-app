@@ -170,3 +170,20 @@ form.search::after {
   outline: none;
   background-color: inherit;
 }
+
+.edit {
+  display: inline-block;
+  padding: 10px 20px; /* Adjust padding as needed */
+  border: 2px solid #3498db; /* Border color */
+  border-radius: 10px; /* Rounded corners */
+  text-decoration: none; /* Remove default underline for links */
+  color: #3498db; /* Text color */
+  background-color: #fff; /* Background color */
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
+
+  /* Optional: Hover effect */
+  &:hover {
+    background-color: #3498db;
+    color: #fff;
+  }
+}

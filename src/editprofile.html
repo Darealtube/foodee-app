@@ -15,6 +15,8 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
     <link rel="stylesheet" href="./styles/profile.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./scripts/editprofile.js"></script>
   </head>
 
   <body>
@@ -63,21 +65,24 @@
               </span>
               <input id="pfp-input" type="file" style="display: none" />
             </div>
-            <div style="display: flex; flex-direction: column">
-              <h1 class="profile-name">Dave De Leon</h1>
-              <a href="./profile.html"><p>Cancel Edit</p></a>
+            <div style="display: flex; flex-direction: column;">
+              <h1 class="profile-name"></h1>
+              <a href="./profile.html" class="edit" id="edit"><p>Cancel Edit</p></a>
+              <a href="./profile.html" class="edit" id="done"><p>Done</p></a> 
             </div>
           </div>
+          
         </div>
 
         <div class="other-details">
           <div class="more-details">
-            <p>Intro</p>
+            <p>Bio</p>
             <textarea
               rows="12"
               cols="40"
               style="resize: none; width: 100%"
-            ></textarea>
+              id="bio"
+              ></textarea>
             <div>
               <input
                 type="text"
@@ -85,29 +90,12 @@
                 class="location-input"
                 placeholder="Enter your location"
               />
-            </div>
+            </div>         
           </div>
-
           <div class="profile-posts">
             <div class="post-list">
               <!-- List of all containers -->
               <div class="container">
-                <header class="food-img">
-                  <img
-                    src="./public/images/profile-post-01.jpg"
-                    alt="Food pic"
-                  />
-                </header>
-                <footer class="food-details">
-                  <div class="food-details-container">
-                    <div class="food-tags">
-                      <button class="tag-post">Affordable</button>
-                      <button class="tag-post">DLSU</button>
-                    </div>
-                    <p class="like-count">123</p>
-                    <div class="material-symbols-outlined like">favorite</div>
-                  </div>
-                </footer>
               </div>
             </div>
           </div>
