@@ -72,8 +72,7 @@ form.search::after {
 
 .main-details {
   display: flex;
-  align-items: center;
-  position: relative;
+  align-items: flex-start;
   bottom: 60px;
 }
 
@@ -102,12 +101,14 @@ form.search::after {
   margin-right: 16px;
   border: 2px solid #001011;
   box-shadow: 2px 2px 2px gray;
+  bottom: 60px;
 }
 
 .profile-img {
+  position: absolute;
   object-fit: cover;
   border-radius: 50%;
-  bottom: 60px;
+  
 }
 
 .other-details {
@@ -134,13 +135,34 @@ form.search::after {
 
 .profile-name {
   font-family: Young serif;
+  margin-right: 20px;
 }
 
 .profile-posts {
   display: grid;
   flex-basis: 55%;
-  grid-template-columns: repeat(2, auto);
   grid-gap: 10px;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "filters content";
+}
+
+.post-filter {
+  width: 80px;
+  grid-area: filters;
+}
+
+.prev-pages,
+.next-pages {
+  user-select: none;
+  cursor: pointer;
+  margin-right: 8px;
+  color: #1d3124;
+  transition: color 250ms ease-in-out;
+}
+
+.prev-pages:hover,
+.next-pages:hover {
+  color: #e59560;
 }
 
 .post-list {
@@ -148,7 +170,9 @@ form.search::after {
   flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
+  grid-area: 2 / 1 / 3 / 3;
   height: 100%;
+  grid-template-columns: repeat(2, auto);
 }
 
 .post-list > div {
@@ -172,17 +196,20 @@ form.search::after {
 
 .edit {
   display: inline-block;
-  padding: 10px 20px; /* Adjust padding as needed */
-  border: 2px solid #3498db; /* Border color */
-  border-radius: 10px; /* Rounded corners */
-  text-decoration: none; /* Remove default underline for links */
-  color: #3498db; /* Text color */
-  background-color: #fff; /* Background color */
-  transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
+  width: 100px;
+  padding: 10px 20px;
+  border: 2px solid #1d3124;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #1d3124;
+  background-color: #bacec1;
+  transition: background-color 0.3s, color 0.3s;
+  font-family: Arial, Helvetica, sans-serif;
+  bottom: 0;
+  left: 0;
 
-  /* Optional: Hover effect */
   &:hover {
-    background-color: #3498db;
+    background-color: #1d3124;
     color: #fff;
   }
 }

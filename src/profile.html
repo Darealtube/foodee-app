@@ -65,9 +65,7 @@
             </div>
             <div style="display: flex; flex-direction: column">
               <h1 class="profile-name"></h1>
-              <a href="./editprofile.html" id="edit-profile" class="edit"
-                ><p>Edit Profile</p></a
-              >
+              <a href="./editprofile.html" id="edit-profile" class="edit"><p>Edit Profile</p></a>
             </div>
           </div>
         </div>
@@ -77,23 +75,36 @@
             <p>Bio</p>
             <p class="bio-text">No bio yet...</p>
 
-            <li class="more-text" id="location"></li>
-            <li class="more-text" id="studied"></li>
+            <p class="more-text" id="location"></p>
+            <p class="more-text" id="studied"></p>
+
           </div>
+  
 
           <div class="profile-posts">
+
+              <span
+                style="
+                  display: flex;
+                  align-items: center;
+                  flex-grow: 1;
+                  margin-left: 8px;
+                "
+              >
+                <p style="margin-right: 8px">Sort By:</p>
+                <select class="post-filters">
+                  <option value="date">Date</option>
+                  <option value="likes">Likes</option>
+                </select>
+                <div class="material-symbols-outlined prev-pages"> arrow_back </div>
+                <div class="material-symbols-outlined next-pages"> arrow_forward </div>
+              </span>
+
             <div class="post-list">
               <!-- List of all containers -->
               <!-- For dynamic content -->
               <!-- Container 1 -->
               <div class="container"></div>
-
-              <!-- Container 2 -->
-              <div class="container"></div>
-
-              <!-- Container 3 -->
-              <div class="container"></div>
-              <!-- List of all containers -->
             </div>
           </div>
         </div>
