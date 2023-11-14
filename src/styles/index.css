@@ -60,6 +60,14 @@ form.search::after {
   display: table;
 }
 
+.search-results {
+  background-color: #f6f4e8;
+}
+
+.search-results.show {
+  display: block;
+}
+
 #add-button {
   transition: 0.3s ease-in-out;
 }
