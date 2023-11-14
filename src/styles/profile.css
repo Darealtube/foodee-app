@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto:wght@400;500;700&display=swap");
 @import "similar-styles.css";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&family=Young+Serif&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&family=Young+Serif&display=swap");
 
 h2 {
   margin: 0;
@@ -126,7 +126,6 @@ form.search::after {
   border-radius: 4px;
 }
 
-
 .bio-text {
   text-align: justify;
   margin: 10px 0;
@@ -186,4 +185,32 @@ form.search::after {
     background-color: #3498db;
     color: #fff;
   }
+}
+
+.status-popup {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  bottom: 40px;
+  left: 40px;
+  transform: translateY(200px);
+  transition: all 250ms ease-out;
+  width: auto;
+  padding: 32px;
+  height: 20px;
+  border-radius: 14px;
+}
+
+.popup-active {
+  transform: translateY(0);
+}
+
+.error {
+  background-color: #b15e6c;
+  color: #f6f4e8;
+}
+
+.success {
+  background-color: #06bc46;
+  color: #001011;
 }

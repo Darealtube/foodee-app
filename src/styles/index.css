@@ -229,3 +229,34 @@ form.search::after {
     background-color: #f6f4e8;
   }
 }
+
+.status-popup {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  bottom: 40px;
+  left: 40px;
+  transform: translateY(200px);
+  transition: all 250ms ease-out;
+  width: auto;
+  padding: 16px;
+  height: 20px;
+  font-family: "Indie Flower";
+  background-color: #f6f4e8;
+  color: #001011;
+  border-radius: 14px;
+}
+
+.popup-active {
+  transform: translateY(0);
+}
+
+.error {
+  background-color: #b15e6c;
+  color: #f6f4e8;
+}
+
+.success {
+  background-color: #06bc46;
+  color: #001011;
+}

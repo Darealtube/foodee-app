@@ -1,13 +1,15 @@
 $(document).ready(() => {
   var urlQuery = new URLSearchParams(window.location.search);
-  const postData = {}; // Hashmap for post data sorted by date
-  const postLikesData = {}; // Hashmap for post data sorted by likes
 
   // Get the category (c), the filter (f), and the page number (p) of the posts based on the url. If there is no url parameter, then just assign default values.
   let category = urlQuery.get("c");
   let filter = urlQuery.get("f") || "date";
   let page = urlQuery.get("p") || 0;
   let endPage;
+
+  // START OF POSTS MANAGEMENT CODE
+  const postData = {}; // Hashmap for post data sorted by date
+  const postLikesData = {}; // Hashmap for post data sorted by likes
 
   const likedPosts = new Set();
 
@@ -166,6 +168,9 @@ $(document).ready(() => {
       }
     }
   });
+  // END OF POSTS MANAGEMENT CODE
+
+  // START OF CATEGORY MANAGEMENT CODE
 
   const categoryData = {}; // Hashmap for category data
   let catPage = urlQuery.get("cp") || 0; // Get the category page number url parameter. If none, set to 0
@@ -272,7 +277,9 @@ $(document).ready(() => {
     }
   });
 
-  // Likes
+  // END OF CATEGORY MANAGEMENT CODE
+
+  // START OF LIKING FUNCTIONALITY
   const likePost = (postId, operation) => {
     const apiRoute =
       operation === "like" ? "/api/posts/like" : "/api/posts/dislike";
@@ -311,4 +318,73 @@ $(document).ready(() => {
       likePost(postId, "dislike");
     }
   });
+
+  // END OF LIKING FUNCTIONALITY
+
+  // START OF APPBAR
+  const appBar = (loggedInUser) => {
+    if (!loggedInUser) {
+      return `
+      <a href="./login.html"><button class="loginBtn">LOG IN</button></a>`;
+    }
+
+    return `
+    <div class="pfp">
+      <a href='profile.html?p=${loggedInUser.name}'>
+        <img
+          src="${loggedInUser.pfp}"
+          width="32px"
+          height="32px"
+          alt="PFP"
+        />
+      </a>
+    </div>
+    <button class="loginBtn logout">LOG OUT</button>
+  `;
+  };
+
+  $.ajax({
+    method: "GET",
+    url: `/api/session`,
+    cache: true,
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: (data) => $(".appbar-nav").append(appBar(data)),
+    error: () => $(".appbar-nav").append(appBar(null)),
+  });
+
+  // END OF APPBAR
+
+  // START OF LOGOUT
+  const logout = () => {
+    $.ajax({
+      url: "/api/logout",
+      method: "POST",
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (data) => {
+        // Show the status popup saying that the user has been logged in successfully
+        $(".status-popup").addClass("popup-active").addClass("success");
+        $("#status-message").text(data.message);
+        setTimeout(() => {
+          window.location.href = "/index.html";
+          $(".status-popup").removeClass("popup-active").removeClass("success");
+        }, 2000);
+      },
+      // Use destructuring to destructure the error parameter to get the responseJSON data
+      error: ({ responseJSON }) => {
+        // Show the status popup saying that the login/signup has failed
+        $(".status-popup").addClass("popup-active").addClass("error");
+        $("#status-message").text(responseJSON.error);
+        setTimeout(() => {
+          $(".status-popup").removeClass("popup-active").removeClass("error");
+        }, 2000);
+      },
+    });
+  };
+
+  $(".appbar-nav").on("click", ".logout", () => {
+    logout();
+  });
+  // END OF LOGOUT
 });

@@ -249,20 +249,29 @@ hr {
 }
 
 .status-popup {
-  position: absolute;
+  position: fixed;
+  display: flex;
+  align-items: center;
   bottom: 40px;
   left: 40px;
   transform: translateY(200px);
   transition: all 250ms ease-out;
   width: auto;
-  padding: 16px;
-  padding-bottom: 32px;
-  height: 40px;
-  background-color: #f6f4e8;
-  color: #001011;
+  padding: 32px;
+  height: 20px;
   border-radius: 14px;
 }
 
 .popup-active {
   transform: translateY(0);
+}
+
+.error {
+  background-color: #b15e6c;
+  color: #f6f4e8;
+}
+
+.success {
+  background-color: #06bc46;
+  color: #001011;
 }

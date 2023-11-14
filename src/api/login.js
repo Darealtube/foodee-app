@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt"); // bcrypt is what we use to hash our passwords
 var jwt = require("jsonwebtoken"); // For JWT authentication
 const router = express.Router();
 const saltRounds = 12; // 12 salt rounds for an overkill password hashing
-var passport = require("passport")
+var passport = require("passport");
 // This sets up the POST reciever of the login API where the user is either logged in or signed up
 router.post("/api/login", async (req, res) => {
   const name = req.body.username;
@@ -56,7 +56,7 @@ router.post("/api/login", async (req, res) => {
         const newUser = await User.create({ name, password: hashedPassword });
         // Create a JWT Token for the user's name to be used for authentication and session management
         const token = jwt.sign({ name: newUser.name }, process.env.JWT_SECRET, {
-          expiresIn: 60 * 60 * 24 * 7,
+          expiresIn: "7d",
         });
         // Put that token inside a cookie
         res.cookie("session", token, {

@@ -21,17 +21,6 @@
         <a href="./index.html" class="pageTitle"><h1>FOODEE</h1></a>
         <span style="flex-grow: 1"></span>
         <div class="material-symbols-outlined">favorite</div>
-        <button class="loginBtn">LOG IN</button>
-        <!-- 
-        THIS VIEW IF USER IS LOGGED IN
-        <div class="pfp">
-          <img
-            src="../public/images/placeholder-pfp-0.avif"
-            width="32px"
-            height="32px"
-          />
-        </div> 
-        -->
       </nav>
     </header>
 
@@ -40,24 +29,28 @@
         <!-- food image -->
         <form id="foodForm">
           <div class="food-img">
-            <img
-              src=""
-              alt="foodImg"
-              width="100%"
-              height="100%"
+            <img src="" alt="foodImg" width="100%" height="100%" />
+            <input
+              id="input-file"
+              type="file"
+              accept="image/jpeg, image/png, image/jpg"
+              style="display: none"
             />
-            <input id="input-file" type="file" accept="image/jpeg, image/png, image/jpg" style="display: none"/>
-          <label for="input-file" style="position: absolute; cursor: pointer">
-            <span
-            id="add_photo"
-            class="material-symbols-outlined"
-            style="position: absolute; cursor: pointer"
-          >
-            photo_camera 
-            </span>
-          </label>
+            <label for="input-file" style="position: absolute; cursor: pointer">
+              <span
+                id="add_photo"
+                class="material-symbols-outlined"
+                style="position: absolute; cursor: pointer"
+              >
+                photo_camera
+              </span>
+            </label>
           </div>
-          <input type="text" class="title-input" placeholder="Add a title here..." />
+          <input
+            type="text"
+            class="title-input"
+            placeholder="Add a title here..."
+          />
           <section class="food-details">
             <div class="author-details">
               <a href="./profile.html">
@@ -68,16 +61,26 @@
                   height="40px"
                   class="author-img"
                 />
-              </a>  
+              </a>
               <h1 class="author-name" id="author">Darryl Javier</h1>
             </div>
-            
+
             <div class="food-description">
-              <textarea rows="5" class="description-input" id="description" placeholder="Add a description here..."></textarea>
+              <textarea
+                rows="5"
+                class="description-input"
+                id="description"
+                placeholder="Add a description here..."
+              ></textarea>
             </div>
-            <input id="location" type="text" placeholder="Enter the location here" required />
+            <input
+              id="location"
+              type="text"
+              placeholder="Enter the location here"
+              required
+            />
             <input id="category" type="text" placeholder="Category" required />
-            <br>
+            <br />
             <button type="submit" id="create_post">Create Post</button>
           </section>
         </form>
@@ -87,5 +90,9 @@
         <h4 id="status-message"></h4>
       </section>
     </main>
+
+    <div class="status-popup">
+      <h4 id="status-message"></h4>
+    </div>
   </body>
 </html>

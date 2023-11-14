@@ -25,13 +25,6 @@
         <a href="./index.html" class="pageTitle"><h1>FOODEE</h1></a>
         <span style="flex-grow: 1"></span>
         <div class="material-symbols-outlined">favorite</div>
-        <div class="pfp">
-          <img
-            src="./public/images/placeholder-pfp-0.avif"
-            width="32px"
-            height="32px"
-          />
-        </div>
       </nav>
     </header>
 
@@ -65,13 +58,14 @@
               </span>
               <input id="pfp-input" type="file" style="display: none" />
             </div>
-            <div style="display: flex; flex-direction: column;">
+            <div style="display: flex; flex-direction: column">
               <h1 class="profile-name"></h1>
-              <a href="./profile.html" class="edit" id="edit"><p>Cancel Edit</p></a>
-              <a href="./profile.html" class="edit" id="done"><p>Done</p></a> 
+              <a href="./profile.html" class="edit" id="edit"
+                ><p>Cancel Edit</p></a
+              >
+              <a href="./profile.html" class="edit" id="done"><p>Done</p></a>
             </div>
           </div>
-          
         </div>
 
         <div class="other-details">
@@ -82,7 +76,7 @@
               cols="40"
               style="resize: none; width: 100%"
               id="bio"
-              ></textarea>
+            ></textarea>
             <div>
               <input
                 type="text"
@@ -90,17 +84,20 @@
                 class="location-input"
                 placeholder="Enter your location"
               />
-            </div>         
+            </div>
           </div>
           <div class="profile-posts">
             <div class="post-list">
               <!-- List of all containers -->
-              <div class="container">
-              </div>
+              <div class="container"></div>
             </div>
           </div>
         </div>
       </div>
     </main>
+
+    <div class="status-popup">
+      <h4 id="status-message"></h4>
+    </div>
   </body>
 </html>

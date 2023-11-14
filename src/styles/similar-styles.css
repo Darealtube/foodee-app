@@ -76,7 +76,6 @@ p {
   height: 32px;
   border: 1px solid black;
   border-radius: 50%;
-  margin-left: 16px;
   transition: 0.5s;
 }
 
