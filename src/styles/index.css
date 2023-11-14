@@ -60,12 +60,10 @@ form.search::after {
   display: table;
 }
 
-.search-results {
-  background-color: #f6f4e8;
-}
-
-.search-results.show {
-  display: block;
+form select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 #add-button {

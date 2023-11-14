@@ -1,7 +1,7 @@
 $(document).ready(() => {
   var urlQuery = new URLSearchParams(window.location.search);
 
-  // Get the category (c), the filter (f), and the page number (p) of the posts based on the url. If there is no url parameter, then just assign default values.
+  // Get the category (c), the filter (f), and the page number (p) of the posts based on the url. If there is no url parameter, then just assign default searchKeyues.
   let category = urlQuery.get("c");
   let filter = urlQuery.get("f") || "date";
   let page = urlQuery.get("p") || 0;
@@ -94,7 +94,7 @@ $(document).ready(() => {
   $(".post-filter").change(function () {
     resetPosts(); // It will reset the posts first
 
-    filter = $(this).val();
+    filter = $(this).searchKey();
     page = 0;
 
     // Then finds out which filter it is
@@ -342,13 +342,13 @@ $(document).ready(() => {
   });
   // END OF LOGOUT
 
+  var searchKey;
   $("input[name='search-bar']").on("keyup", function() {
-    const val = $(this).val();
-    if (val.trim() !== "") {
+    searchKey = $(this).val();
+    if (searchKey.trim() !== "") {
       $.ajax({
-        url: "/api/searchCategories",
+        url: `/api/searchCategories?k=${searchKey}`,
         type: "GET",
-        data: { k: val },
         success: function(response) {
           $(".search-results").empty();
           response.forEach(function(category) {
@@ -364,4 +364,27 @@ $(document).ready(() => {
       $(".search-results").empty();
     }
   });
+
+ $(".search").submit(function (event) {
+  event.preventDefault();
+  window.location.href = `/index.html?p=0&f=date&c=${searchKey}`
+})
+
+ /* $(".search").submit(function(event) {
+    event.preventDefault();
+    var uInput = $("input[name='search-bar']").searchKey(); // Get user input
+    $.ajax({
+      url: "/api/searchCategories",
+      method: "POST",
+      data: { k: uInput },
+      success: function(response) {
+        if (response.matchFound) {
+          // What should be the format of the link?
+        }
+      },
+      error: function() {
+        // Handle error case
+      }
+    });
+  }); */
 });

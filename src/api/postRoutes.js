@@ -19,7 +19,7 @@ router.get("/api/posts", async (req, res) => {
     // The $in aggregate checks if the categories array has atleast one of its categories equal to the category parameter. It only does this check if there is a category on the url parameter.
     
     const posts = await Post.find(
-      category && { categories: { $regex: category, $options: "i"} }
+      category && { categories: { $elemMatch: { $regex: new RegExp(category, 'i')}}}
     )
       .skip(pageOffset)
       .limit(postPerPage)
