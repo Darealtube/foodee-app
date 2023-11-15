@@ -110,10 +110,22 @@ $(document).ready(function () {
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({message, author, post}),
         success: (data) => {
-          console.log(data);
+          // Show the status popup saying that the user has been logged in successfully
+          $(".status-popup").addClass("popup-active").addClass("success");
+          $("#status-message").text(data.message);
+          setTimeout(() => {
+            window.location.reload();
+            $(".comment-input").text("");
+            $(".status-popup").removeClass("popup-active").removeClass("success");
+          }, 2000);
         },
         error: () => {
-          console.error("error");
+          // Show the status popup saying that the login/signup has failed
+          $(".status-popup").addClass("popup-active").addClass("error");
+          $("#status-message").text(responseJSON.error);
+          setTimeout(() => {
+            $(".status-popup").removeClass("popup-active").removeClass("error");
+          }, 2000);
         }
      })
 
