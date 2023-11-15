@@ -16,7 +16,7 @@
     />
     <link rel="stylesheet" href="./styles/profile.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="./scripts/editprofile.js"></script>
+    <script src="./scripts/profile.js"></script>
   </head>
 
   <body>
@@ -24,7 +24,26 @@
       <nav class="appbar-nav">
         <a href="./index.html" class="pageTitle"><h1>FOODEE</h1></a>
         <span style="flex-grow: 1"></span>
-        <div class="material-symbols-outlined">favorite</div>
+        <!-- Search Bar -->
+        <form class="search" action="">
+          <input
+            type="text"
+            placeholder="What are you craving?"
+            name="search-bar"
+          />
+          <button type="submit">
+            <span class="material-symbols-outlined"> search </span>
+          </button>
+        </form>
+
+        <a
+          href="./createpost.html"
+          style="text-decoration: none; color: inherit"
+        >
+          <span class="material-symbols-outlined" style="margin-right: 8px">
+            add
+          </span>
+        </a>
       </nav>
     </header>
 
@@ -60,10 +79,8 @@
             </div>
             <div style="display: flex; flex-direction: column">
               <h1 class="profile-name"></h1>
-              <a href="./profile.html" class="edit" id="edit"
-                ><p>Cancel Edit</p></a
-              >
-              <a href="./profile.html" class="edit" id="done"><p>Done</p></a>
+              <a class="edit" id="cancel"><p>Cancel Edit</p></a>
+              <a class="edit" id="done"><p>Done</p></a>
             </div>
           </div>
         </div>
@@ -86,18 +103,14 @@
               />
             </div>
           </div>
-          <div class="profile-posts">
-            <div class="post-list">
-              <!-- List of all containers -->
-              <div class="container"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
 
-    <div class="status-popup">
-      <h4 id="status-message"></h4>
+
+      </div>
     </div>
-  </body>
+  </main>
+
+  <div class="status-popup">
+    <h4 id="status-message"></h4>
+  </div>
+</body>
 </html>
