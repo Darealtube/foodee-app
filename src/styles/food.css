@@ -313,6 +313,26 @@ main {
   margin: 0;
 }
 
+.edit-comment{
+  display: inline-block;
+  width: 30px;
+  padding: 1px 20px;
+  border: 2px solid #1d3124;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #1d3124;
+  background-color: #bacec1;
+  transition: background-color 0.3s, color 0.3s;
+  font-family: Arial, Helvetica, sans-serif;
+  bottom: 0;
+  left: 0;
+
+  &:hover {
+    background-color: #1d3124;
+    color: #fff;
+  }
+}
+
 /* Create post css */
 
 input[type="text"] {

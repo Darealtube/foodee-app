@@ -1,5 +1,6 @@
 $(document).ready(function () {
   var urlQuery = new URLSearchParams(window.location.search);
+  var loggedInUser = null;
   let postId = urlQuery.get("p") || 0;
   
   // LOAD SINGLE POST
@@ -37,7 +38,7 @@ $(document).ready(function () {
   // START OF COMMENTS
 
   // GET POST COMMENTS
-  const getPostComments = () => {
+  const getPostComments = (loggedInUser) => {
     $.ajax({
       method: "GET",
       url: `/api/comments/?p=${postId}`,
@@ -45,7 +46,7 @@ $(document).ready(function () {
       dataType: "json",
       success: (data) => {
         console.log(data);
-        for(let i=0; i<data.length; i++){
+        for (let i = 0; i < data.length; i++) {
           $(".food-comments").append($(
             `<div class="comment">
               <img
@@ -58,9 +59,15 @@ $(document).ready(function () {
               <div class="comment-msg">
                 <h6 class="comment-author">${data[i].author}</h6>
                 <p class="comment-text">${data[i].message}</p>
-              </div>
-            </div>`
+              </div>`
           ));
+          console.log(loggedInUser);
+          // Check if the logged-in user is not the author
+          if (loggedInUser.name === data[i].author) {
+            // Append the edit profile link
+            $(".comment").append($(`<a class="edit-comment"><p>Edit</p></a>`));
+          }
+        
         }
       },
       error: ({ responseJSON }) => {
@@ -73,7 +80,7 @@ $(document).ready(function () {
       },
     })
   }
-  getPostComments();
+  getPostComments(loggedInUser);
 
 
   // ADD POST COMMENTS
