@@ -24,19 +24,20 @@ $(document).ready(() => {
   `;
   };
 
-  const loadData = (loggedInUser) => {
-    $(".profile-img").attr("src", loggedInUser.pfp);
-    $(".profile-name").text(loggedInUser.name);
-    $(".header-img").attr("src", loggedInUser.header);
-    $("#bio").val(loggedInUser.bio);
-    $("#location-input").val(loggedInUser.address);
+  const loadData = (user) => {
+    loggedInUser = user;
+    $(".profile-img").attr("src", user.pfp);
+    $(".profile-name").text(user.name);
+    $(".header-img").attr("src", user.header);
+    $("#bio").val(user.bio);
+    $("#location-input").val(user.address);
 
-    profileForm.append("pfp", loggedInUser.pfp);
-    profileForm.append("header", loggedInUser.header);
-    profileForm.append("address", loggedInUser.address);
-    profileForm.append("bio", loggedInUser.bio);
+    profileForm.append("pfp", user.pfp);
+    profileForm.append("header", user.header);
+    profileForm.append("address", user.address);
+    profileForm.append("bio", user.bio);
 
-    $(".appbar-nav").append(appBar(loggedInUser));
+    $(".appbar-nav").append(appBar(user));
   };
 
   const getSession = () => {
@@ -146,7 +147,7 @@ $(document).ready(() => {
 
   $("#cancel").click(function () {
     const newUrl = `/profile.html?u=${loggedInUser.name}`;
-    window.location.href = newUrl;
+    $(this).attr("href", newUrl);
   });
 
   var searchKey;
