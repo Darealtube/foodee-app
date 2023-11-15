@@ -25,8 +25,17 @@ router.put(
   async (req, res) => {
     let { address, bio } = req.body;
     try {
-      const pfp = await imageUploader(req.files[0]);
-      const header = await imageUploader(req.files[1]);
+      var pfp = null;
+      var header = null;
+
+      for (let i = 0; i < req.files.length; ++i) {
+        if (req.files[i].fieldname == "header") {
+          header = await imageUploader(req.files[i]);
+        } else {
+          pfp = await imageUploader(req.files[i]);
+        }
+      }
+
       await User.updateOne(
         { name: req.user.name },
         { address, bio, ...(pfp && { pfp }), ...(header && { header }) }
