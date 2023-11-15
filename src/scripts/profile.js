@@ -21,6 +21,7 @@ $(document).ready(() => {
       <a href="./login.html"><button class="loginBtn">LOG IN</button></a>`;
     }
 
+    $(".add-button").show();
     return `
     <div class="pfp">
       <a href='profile.html?u=${loggedInUser.name}'>
@@ -36,6 +37,7 @@ $(document).ready(() => {
   `;
   };
 
+  $(".add-button").hide();
   const getLoggedInUser = () => {
     $.ajax({
       method: "GET",

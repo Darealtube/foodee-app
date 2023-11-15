@@ -63,6 +63,7 @@ $(document).ready(function () {
       <a href="./login.html"><button class="loginBtn">LOG IN</button></a>`;
     }
 
+    $(".add-button").show();
     return `
     <div class="pfp">
       <a href='profile.html?u=${loggedInUser.name}'>
@@ -78,6 +79,7 @@ $(document).ready(function () {
   `;
   };
 
+  $(".add-button").hide();
   $.ajax({
     method: "GET",
     url: `/api/session`,
