@@ -50,7 +50,7 @@ $(document).ready(function () {
 
     return `
     <div class="pfp">
-      <a href='profile.html?p=${loggedInUser.name}'>
+      <a href='profile.html?u=${loggedInUser.name}'>
         <img
           src="${loggedInUser.pfp}"
           width="32px"
