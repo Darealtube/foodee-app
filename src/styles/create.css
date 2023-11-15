@@ -1,0 +1,402 @@
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&family=Young+Serif&display=swap');
+
+html {
+  zoom: 110%;
+  font-family: Young serif;
+}
+
+body {
+  margin: 0;
+  background-color: #f6f4e8;
+}
+
+h1 {
+  margin: 0;
+}
+
+h6 {
+  margin: 0;
+}
+
+p {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.pageTitle {
+  font-family: "Indie Flower";
+  font-weight: bold;
+  text-decoration: none;
+  color: inherit;
+}
+
+.appbar {
+  background-image: url(../public/images/backdrop-02.png);
+  background-size: 500px 100px;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 8px;
+  position: sticky;
+  top: 0;
+  background-color: #e59560;
+  box-shadow: 3px 3px 6px gray;
+  transition: 0.5s;
+}
+
+.appbar:hover {
+  box-shadow: 4px 4px 6px gray;
+}
+
+.appbar-nav {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+form.search {
+  width: 270px;
+  height: 36px;
+  display: flex;
+}
+
+form.search input[type="text"] {
+  box-shadow: 1px 1px 2px #000;
+  border-radius: 5%;
+  background-color: #f6f4e8;
+  padding: 10px;
+  font-family: "Indie Flower";
+  font-size: 18px;
+  border: none;
+  float: left;
+  width: 80%;
+}
+
+form.search button {
+  float: left;
+  width: 10%;
+  padding: 2px;
+  background: inherit;
+  color: #1d3124;
+  border: none;
+  cursor: pointer;
+  transition: 1s;
+}
+
+form.search span:hover {
+  transform: scale(1.2, 1.2);
+  color: #3b7e2e;
+  text-shadow: 1px 1px 1px gray;
+  transition: 0.5s;
+}
+
+form.search::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.loginBtn {
+  cursor: pointer;
+  background-color: #1d3124;
+  color: #f6f4e8;
+  font-family: "Indie Flower";
+  outline: none;
+  border: none;
+  width: 80px;
+  height: 34px;
+  border-radius: 10%;
+  margin-left: 8px;
+  box-shadow: 2px 2px 4px #000;
+  transition: all 200ms ease-in-out;
+}
+
+.loginBtn:hover {
+  box-shadow: 2px 2px 4px #000;
+  background-color: #3b7e2e;
+  color: #f6f4e8;
+}
+
+.pfp {
+  width: 32px;
+  height: 32px;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin-left: 16px;
+  transition: 0.5s;
+}
+
+.pfp:hover {
+  border: 1.5px solid #06bc46;
+  box-shadow: 3px 3px 6px black;
+  cursor: pointer;
+}
+
+.pfp img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+main {
+  display: flex;
+  padding: 8px;
+  height: 100%;
+}
+
+.food-main {
+  margin-right: 10px;
+  flex: 1;
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  max-height: 100vh;
+  padding: 8px;
+  box-shadow: 2px 2px 2px gray;
+  background-color: #bacec1;
+}
+
+.food-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 400px;
+}
+
+.food-img img {
+  object-fit: cover;
+}
+
+.comment-form {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.comment-input {
+  margin-left: 8px;
+  margin-right: 8px;
+  flex-grow: 1;
+  outline: none;
+  background-color: inherit;
+  border: none;
+  border-bottom: 1px solid;
+  font-family: Roboto;
+}
+
+.comment-button {
+  background-color: inherit;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.comment-form {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.comment-input {
+  margin-left: 8px;
+  margin-right: 8px;
+  flex-grow: 1;
+  outline: none;
+  background-color: inherit;
+  border: none;
+  border-bottom: 1px solid;
+  min-height: 20px;
+  max-height: 80px;
+  word-break: break-all;
+  word-wrap: break-word;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}
+
+.comment-msg {
+  font-family: Roboto;
+}
+
+.food-title {
+  font-size: 30px;
+  padding-bottom: 12px;
+}
+
+.food-comments {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  display: flex;
+  flex-direction: column;
+}
+
+.food-details {
+  margin-left: 10px;
+  box-shadow: 2px 2px 2px gray;
+  background-color: #bacec1;
+  flex: 1;
+  max-width:50%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  max-height: 50%;
+  padding: 16px;
+}
+
+.food-description {
+  width: 100%;
+  height: 50%;
+  margin-bottom: 8px;
+  font-family: Roboto;
+}
+
+.author-details {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.author-img {
+  border-radius: 50%;
+  margin-right: 8px;
+  object-fit: cover;
+}
+
+.comment {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.comment-msg {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-author-pfp {
+  margin-right: 8px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.comment-date {
+  font-size: 8px;
+  color: gray;
+  padding-top: 1px;
+  padding-left: 1px;
+  margin: 0;
+}
+
+/* Create post css */
+
+input[type="text"] {
+  font-family: "Indie Flower";
+  outline: none;
+  border: none;
+  border-bottom: 1px solid black;
+  width: 100%;
+  background: inherit;
+}
+
+.title-input {
+  margin-top: 16px;
+  font-size: 32px;
+}
+
+.description-input {
+  width: 100%;
+  resize: none;
+  outline: none;
+  font-family: "Indie Flower";
+}
+
+button {
+  cursor: pointer;
+  background-color: #1d3124;
+  color: #f6f4e8;
+  font-family: "Indie Flower";
+  outline: none;
+  border: none;
+  height: 40px;
+  border-radius: 10%;
+  margin-left: 8px;
+  transition: all 200ms ease-in-out;
+}
+
+.status-popup {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  bottom: 40px;
+  left: 40px;
+  transform: translateY(200px);
+  transition: all 250ms ease-out;
+  width: auto;
+  padding: 32px;
+  height: 20px;
+  border-radius: 14px;
+}
+
+.popup-active {
+  transform: translateY(0);
+}
+
+.error {
+  background-color: #b15e6c;
+  color: #f6f4e8;
+}
+
+.success {
+  background-color: #06bc46;
+  color: #001011;
+}
+
+#add_photo{
+  transition: 0.3s ease-in-out;
+}
+
+#add_photo:hover {
+  transform: scale(1.2, 1.2);
+  color: #3b7e2e;
+  text-shadow: 1px 1px 1px gray;
+}
+
+#add-button {
+  transition: 0.3s ease-in-out;
+}
+
+#add-button:hover {
+  transform: scale(1.2, 1.2);
+  color: #3b7e2e;
+  text-shadow: 1px 1px 1px gray;
+}
+
+#send-button {
+  transition: 0.3s ease-in-out;
+}
+
+#send-button:hover {
+  transform: scale(1.2, 1.2);
+  color: #3b7e2e;
+  text-shadow: 1px 1px 1px gray;
+}
+
+#create_post {
+  transition: 0.3s ease-in-out;
+}
+
+#create_post:hover {
+  color: #3b7e2e;
+}
