@@ -3,23 +3,6 @@ $(document).ready(function () {
   let postId = urlQuery.get("p") || 0;
 
   var loggedInUser = null;
-
-  const getLoggedInUser = () => {
-    $.ajax({
-      method: "GET",
-      url: `/api/session`,
-      cache: true,
-      contentType: "application/json; charset=utf-8",
-      dataType: "json",
-      success: (data) => {loggedInUser = data; 
-        console.log(loggedInUser);
-      },
-      error: (error) => {console.error("Error fetching logged in user information:", error);},
-    });
-  };
-
-  getLoggedInUser();
-  console.log(loggedInUser);
   
   // LOAD SINGLE POST
   const getSinglePost = () => {
@@ -64,27 +47,40 @@ $(document).ready(function () {
       dataType: "json",
       success: (data) => {
         console.log(data);
+        
         for (let i = 0; i < data.length; i++) {
-          $(".food-comments").append($(
-            `<div class="comment">
-              <img
-                src="${data[i].authorPFP}"
-                alt=""
-                height="32px"
-                width="32px"
-                class="comment-author-pfp"
-              />
-              <div class="comment-msg">
-                <h6 class="comment-author">${data[i].author}</h6>
-                <p class="comment-text">${data[i].message}</p>
-              </div>`
-          ));
-          console.log(loggedInUser);
-          // Check if the logged-in user is not the author
-          if (loggedInUser.name === data[i].author) {
-            // Append the edit profile link
-            $(".comment").append($(`<a class="edit-comment"><p>Edit</p></a>`));
-          }
+          var loggedInUser = null;
+          $.ajax({
+            method: "GET",
+            url: `/api/session`,
+            cache: true,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: (datas) => {loggedInUser = datas; 
+              $(".food-comments").append($(
+                `<div class="comment">
+                  <img
+                    src="${loggedInUser.pfp}"
+                    alt=""
+                    height="32px"
+                    width="32px"
+                    class="comment-author-pfp"
+                  />
+                  <div class="comment-msg">
+                    <h6 class="comment-author">${data[i].author}</h6>
+                    <p class="comment-text">${data[i].message}</p>
+                  </div>`
+              ));
+              console.log(loggedInUser);
+              // Check if the logged-in user is not the author
+              if (loggedInUser.name === data[i].author) {
+                // Append the edit profile link
+                $(".comment").append($(`<a class="edit-comment"><p>Edit</p></a>`));
+              }
+            },
+            error: (error) => {console.error("Error fetching logged in user information:", error);},
+          });
+
         
         }
       },
