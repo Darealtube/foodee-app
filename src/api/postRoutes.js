@@ -41,13 +41,19 @@ router.get("/api/posts/:id", async (req, res) => {
   var loggedInUser = null;
 
   try {
+    var isLiked = false;
     if (req.cookies.session) {
       loggedInUser = jwt.verify(req.cookies.session, process.env.JWT_SECRET);
+      isLiked = await Like.exists({ user: loggedInUser.name, post: postId });
     }
-    /* const isLiked = await Like.exists({ user: loggedInUser.name }); */
+
     const post = await Post.findById(postId);
     const author = await User.findOne({ name: post.author });
-    const postAndAuthor = { ...post.toObject(), authorPFP: author.pfp };
+    const postAndAuthor = {
+      ...post.toObject(),
+      authorPFP: author.pfp,
+      isLiked: isLiked ? true : false,
+    };
     res.json(postAndAuthor).status(200);
   } catch (error) {
     res
@@ -73,36 +79,23 @@ router.get("/api/posts/profile/:id", async (req, res) => {
   }
 });
 
-// Update a post by liking (PROVEN TO WORK PROPERLY)
 router.put(
-  "/api/posts/like",
-  passport.authenticate("jwt", { session: false }), // Add this to add an authentication layer to the API. It checks if the user is logged in.
-  async (req, res) => {
-    let post = req.body.post; // POST ID
-    let { name } = req.user; // You can access the logged in user's data with req.user since in our strategy, when there is a user it's assigned to "user"
-    try {
-      await Like.create({ user: name, post }); // Darryl Javier for now because there's not yet session management
-      await Post.updateOne({ _id: post }, { $inc: { likes: 1 } });
-    } catch (error) {
-      res
-        .status(500)
-        .json({ error: "An error occured while updating the post." });
-    }
-  }
-);
-
-// Update a post by disliking (PROVEN TO WORK PROPERLY)
-router.put(
-  "/api/posts/dislike",
-  passport.authenticate("jwt", { session: false }), // Add this to add an authentication layer to the API. It checks if the user is logged in.
+  "/api/posts/favorite",
+  passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     let post = req.body.post; // POST ID
     let { name } = req.user; // You can access the logged in user's data with req.user since in our strategy, when there is a user it's assigned to "user"
 
+    const isLiked = await Like.exists({ user: name, post });
     try {
-      // If dislike operation,
-      await Like.deleteOne({ user: name, post }); // Darryl Javier for now because there's not yet session management
-      await Post.updateOne({ _id: post }, { $inc: { likes: -1 } });
+      if (isLiked) {
+        await Like.deleteOne({ user: name, post });
+        await Post.updateOne({ _id: post }, { $inc: { likes: -1 } });
+      } else {
+        await Like.create({ user: name, post });
+        await Post.updateOne({ _id: post }, { $inc: { likes: 1 } });
+      }
+      res.status(200);
     } catch (error) {
       res
         .status(500)
