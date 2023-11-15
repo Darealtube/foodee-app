@@ -23,7 +23,6 @@ router.get("/api/categories", async (req, res) => {
 router.get("/api/searchCategories", async (req, res) => {
   // Get the search key
   let key = req.query.k;
-  console.log(key);
   try {
     const categories = await Category.find({ name: { $regex: key, $options: 'i' } })
       .limit(5)

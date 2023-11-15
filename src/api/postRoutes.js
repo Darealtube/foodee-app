@@ -1,4 +1,5 @@
 const Post = require("../../schemas/PostSchema");
+const User = require("../../schemas/UserSchema");
 const Like = require("../../schemas/LikesSchema");
 const Categories = require("../../schemas/CategorySchema");
 const passport = require("passport");
@@ -21,7 +22,9 @@ router.get("/api/posts", async (req, res) => {
     // The $in aggregate checks if the categories array has atleast one of its categories equal to the category parameter. It only does this check if there is a category on the url parameter.
 
     const posts = await Post.find(
-      category && { categories: { $elemMatch: { $regex: new RegExp(category, 'i')}}}
+      category && {
+        categories: { $elemMatch: { $regex: new RegExp(category, "i") } },
+      }
     )
       .skip(pageOffset)
       .limit(postPerPage)
@@ -36,14 +39,16 @@ router.get("/api/posts", async (req, res) => {
 router.get("/api/posts/:id", async (req, res) => {
   let postId = req.params.id; // POST ID
   var loggedInUser = null;
+
   try {
     if (req.cookies.session) {
       loggedInUser = jwt.verify(req.cookies.session, process.env.JWT_SECRET);
     }
-    const isLiked = await Like.exists({ user: loggedInUser.name });
+    /* const isLiked = await Like.exists({ user: loggedInUser.name }); */
     const post = await Post.findById(postId);
     const author = await User.findOne({ name: post.author });
-    res.json({ ...post, authorPFP: author.pfp, isLiked }).status(200);
+    const postAndAuthor = { ...post.toObject(), authorPFP: author.pfp };
+    res.json(postAndAuthor).status(200);
   } catch (error) {
     res
       .status(500)
@@ -109,14 +114,27 @@ router.put(
 // Update a post using PUT method (PROVEN TO WORK PROPERLY)
 router.put(
   "/api/posts",
-  passport.authenticate("jwt", { session: false }), // Add this to add an authentication layer to the API. It checks if the user is logged in.
+  passport.authenticate("jwt", { session: false }),
+  upload.any(), // Add this to add an authentication layer to the API. It checks if the user is logged in.
   async (req, res) => {
     let post = req.body.post; // POST ID
     // The JSON in the request when requesting from client to server should be something like:
     // JSON.Stringify({post_img: ..., caption: ..., etc.})
-    const { post_img, caption, location, categories } = req.body; // Use destructuring operation to get values from object
+    const { title, caption, location, categories } = req.body;
 
     try {
+      var imageURI = null;
+      if (req.files[0]) {
+        const { buffer, mimetype } = req.files[0];
+        const b64 = Buffer.from(buffer).toString("base64");
+        const imageData = "data:" + mimetype + ";base64," + b64;
+        imageURI = await cloudinary.uploader.upload(imageData, {
+          resource_type: "auto",
+          upload_preset: "ml_default",
+          folder: "foodee",
+        });
+      }
+
       const oldPost = await Post.findById(post);
 
       if (oldPost.author != req.user.name) {
@@ -127,7 +145,13 @@ router.put(
 
       const newPost = await Post.findOneAndUpdate(
         { _id: post },
-        { post_img, caption, location, categories },
+        {
+          ...(imageURI && { post_img: imageURI.secure_url }),
+          caption,
+          location,
+          categories: categories.split(",").map((cat) => cat.trim()),
+          title,
+        },
         { new: true }
       );
 
@@ -168,7 +192,7 @@ router.post(
   upload.any(), // Add this to add an authentication layer to the API. It checks if the user is logged in.
   async (req, res) => {
     let author = req.user; // Logged in user
-    const { caption, location, categories } = req.body;
+    const { title, caption, location, categories } = req.body;
     const { buffer, mimetype } = req.files[0];
 
     const b64 = Buffer.from(buffer).toString("base64");
@@ -183,9 +207,10 @@ router.post(
 
       await Post.create({
         post_img: result.secure_url,
+        title,
         caption,
         location,
-        categories,
+        categories: categories.split(",").map((cat) => cat.trim()),
         author: author.name,
       });
 

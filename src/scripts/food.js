@@ -6,14 +6,11 @@ $(document).ready(function () {
     $.ajax({
       method: "GET",
       url: `/api/posts/${postId}`,
-      cache: true,
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       success: (data) => {
-        console.log(data);
-
         $(".food-img img").attr("src", data.post_img);
-        $(".author-name").text(data.name);
+        $(".author-name").text(data.author);
 
         // not working
         $(".author-details img").attr("src", data.authorPFP);
