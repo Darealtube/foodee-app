@@ -2,7 +2,7 @@ $(document).ready(() => {
   var urlQuery = new URLSearchParams(window.location.search);
   const postData = []; // Hashmap for post data sorted by date
   const postLikesData = []; // Hashmap for post data sorted by likes
-  
+
   var user = urlQuery.get("u");
   var loggedInUser = null;
 
@@ -12,75 +12,97 @@ $(document).ready(() => {
 
   const likedPosts = new Set();
 
-  const editProfileLink = document.getElementById("edit-profile");
+  const editProfileLink = $("#edit-profile");
+  editProfileLink.hide();
 
-
-    const getLoggedInUser = () => {
-      $.ajax({
-        method: "GET",
-        url: `/api/session`,
-        cache: true,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: (data) => {loggedInUser = data;
-          if(loggedInUser.name != user) {
-            editProfileLink.remove();
-          }
-        },
-        error: (error) => {console.error("Error fetching logged in user information:", error);},
-      });
-    };
-
-    getLoggedInUser();
-
-
-
-    const getUserInfo = () => {
-      $.ajax({
-        method: "GET",
-        url: `/api/profile?p=${user}`,
-        dataType: "json",
-        success: (userData) => {
-          // Updates HTML elements with the user information
-          $(".profile-name").text(userData.name);
-          $(".bio-text").text(userData.bio);
-          $("#location").text(userData.address);
-          $(".profile-img").attr("src", userData.pfp);
-          $(".backdrop-img").attr("src", userData.header);
-        },
-        error: (error) => {
-          // Error handling
-          console.error("Error fetching user information:", error);
-        }
-      });
-    };
-
-
-    
-    const getUserPosts = (user, page, filter) => {
-      $.ajax({
-        method: "GET",
-        url: `/api/posts/profile/${user}?p=${page}&f=${filter}`,
-        dataType: "json",
-        success: (data) => {
-          console.log(data);
-          if (data.length < 2) endPage = page;
-          if (filter == "date") {
-            postData[page] = data;
-          } else postLikesData[page] = data;
-          appendPosts(data);
-        },
-        error: (error) => {
-          // Handle errors, such as displaying an error message
-          console.error("Error fetching posts:", error);
-        }
-      });
-    };
-
-    const generatePost = (postData) => {
-      const isLiked = likedPosts.has(postData._id);
-      const postLikes = isLiked ? postData.likes + 1 : postData.likes;
+  const appBar = (loggedInUser) => {
+    if (!loggedInUser) {
       return `
+      <a href="./login.html"><button class="loginBtn">LOG IN</button></a>`;
+    }
+
+    return `
+    <div class="pfp">
+      <a href='profile.html?u=${loggedInUser.name}'>
+        <img
+          src="${loggedInUser.pfp}"
+          width="32px"
+          height="32px"
+          alt="PFP"
+        />
+      </a>
+    </div>
+    <button class="loginBtn logout">LOG OUT</button>
+  `;
+  };
+
+  const getLoggedInUser = () => {
+    $.ajax({
+      method: "GET",
+      url: `/api/session`,
+      cache: true,
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (data) => {
+        loggedInUser = data;
+        if (loggedInUser.name == user) {
+          editProfileLink.show();
+        }
+        $(".appbar-nav").append(appBar(data));
+      },
+      error: (error) => {
+        $(".appbar-nav").append(appBar(null));
+        console.error("Error fetching logged in user information:", error);
+      },
+    });
+  };
+
+  getLoggedInUser();
+
+  const getUserInfo = () => {
+    $.ajax({
+      method: "GET",
+      url: `/api/profile?p=${user}`,
+      dataType: "json",
+      success: (userData) => {
+        // Updates HTML elements with the user information
+        $(".profile-name").text(userData.name);
+        $(".bio-text").text(userData.bio);
+        $("#location").text(userData.address);
+        $(".profile-img").attr("src", userData.pfp);
+        $(".backdrop-img").attr("src", userData.header);
+      },
+      error: (error) => {
+        // Error handling
+        console.error("Error fetching user information:", error);
+      },
+    });
+  };
+
+  const getUserPosts = (user, page, filter) => {
+    $.ajax({
+      method: "GET",
+      url: `/api/posts/profile/${user}?p=${page}&f=${filter}`,
+      dataType: "json",
+      success: (data) => {
+        console.log(data);
+        if (data.length < 2) endPage = page;
+        if (filter == "date") {
+          postData[page] = data;
+        } else postLikesData[page] = data;
+        appendPosts(data);
+      },
+      error: (error) => {
+        // Handle errors, such as displaying an error message
+        console.error("Error fetching posts:", error);
+      },
+    });
+  };
+
+  const generatePost = (postData) => {
+    const isLiked = likedPosts.has(postData._id);
+    const postLikes = isLiked ? postData.likes + 1 : postData.likes;
+    return `
 
       <div class="container" id="${postData._id}">
       <header class="food-img">
@@ -102,53 +124,53 @@ $(document).ready(() => {
     </div>
 
       `;
-    };
+  };
 
-    const appendPosts = (posts) => {
-      const container = $(".post-list");
-      
-      // Clear existing containers
-      container.empty();
-    
-      // Add containers for each post
-      for (let i = 0; i < posts.length; ++i) {
-        const post = $(generatePost(posts[i]));
-        container.append(post);
-      }
-    
-      // Determine the total number of containers (posts + empty containers)
-      const numContainers = Math.max(posts.length, posts.length);
-    
-      // If there are fewer posts than containers, add empty containers for the remaining space
-      const numEmptyContainers = Math.max(0, numContainers - posts.length);
-      for (let i = 0; i < numEmptyContainers; ++i) {
-        container.append('<div class="container"></div>');
-      }
-    };
+  const appendPosts = (posts) => {
+    const container = $(".post-list");
 
-    const generateTags = (tags) => {
-      let tagsHTML = "";
-  
-      for (let i = 0; i < tags.length; ++i) {
-        tagsHTML += `<a href="/index.html?c=${tags[i]}"><button class="tag-post">${tags[i]}</button></a>`;
-      }
-  
-      return tagsHTML;
-    };
+    // Clear existing containers
+    container.empty();
+
+    // Add containers for each post
+    for (let i = 0; i < posts.length; ++i) {
+      const post = $(generatePost(posts[i]));
+      container.append(post);
+    }
+
+    // Determine the total number of containers (posts + empty containers)
+    const numContainers = Math.max(posts.length, posts.length);
+
+    // If there are fewer posts than containers, add empty containers for the remaining space
+    const numEmptyContainers = Math.max(0, numContainers - posts.length);
+    for (let i = 0; i < numEmptyContainers; ++i) {
+      container.append('<div class="container"></div>');
+    }
+  };
+
+  const generateTags = (tags) => {
+    let tagsHTML = "";
+
+    for (let i = 0; i < tags.length; ++i) {
+      tagsHTML += `<a href="/index.html?c=${tags[i]}"><button class="tag-post">${tags[i]}</button></a>`;
+    }
+
+    return tagsHTML;
+  };
 
   getUserInfo();
   getUserPosts(user, page, filter);
-  
+
   const resetPosts = () => {
     $("main").find(".container").remove();
   };
 
   $(".post-filters").change(function () {
     resetPosts();
-  
+
     filter = $(this).val();
     page = 0;
-  
+
     // Then finds out which filter it is
     if (filter === "date") {
       if (postData[page]) {
@@ -223,79 +245,6 @@ $(document).ready(() => {
     }
   });
 
-
-  $("#edit-profile").click(function (loggedInUser) {
-    const newUrl = `http://localhost:3000/editprofile.html?u=${user}`;
-    window.location.href = newUrl;
-  });
-
-  $("#cancel").click(function () {
-    const newUrl = `http://localhost:3000/profile.html?u=${user}`;
-    window.location.href = newUrl;
-  });
-
-  $("#done").click(function () {
-      // Extract values from the text area and input field
-      const bioValue = $("#bio").val();
-      const locationValue = $("#location").val();
-
-      // Replace these values with your actual data
-      const profileData = {
-        address: locationValue,
-        bio: bioValue,
-      };
-
-      $.ajax({
-        method: "PUT",
-        url: "/api/profile",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: JSON.stringify(profileData),
-        success: (response) => {
-          console.log("Profile updated successfully:", response);
-        },
-        error: (error) => {
-          console.error("Error updating profile:", error);
-        }
-      });
-
-
-  });
-
-  // START OF APPBAR
-  const appBar = (loggedInUser) => {
-    if (!loggedInUser) {
-      return `
-      <a href="./login.html"><button class="loginBtn">LOG IN</button></a>`;
-    }
-
-    return `
-    <div class="pfp">
-      <a href='profile.html?u=${loggedInUser.name}'>
-        <img
-          src="${loggedInUser.pfp}"
-          width="32px"
-          height="32px"
-          alt="PFP"
-        />
-      </a>
-    </div>
-    <button class="loginBtn logout">LOG OUT</button>
-  `;
-  };
-
-  $.ajax({
-    method: "GET",
-    url: `/api/session`,
-    cache: true,
-    contentType: "application/json; charset=utf-8",
-    dataType: "json",
-    success: (data) => $(".appbar-nav").append(appBar(data)),
-    error: () => $(".appbar-nav").append(appBar(null)),
-  });
-
-  // END OF APPBAR
-
   // START OF LOGOUT
   const logout = () => {
     $.ajax({
@@ -330,31 +279,34 @@ $(document).ready(() => {
   // END OF LOGOUT
 
   var searchKey;
-  $("input[name='search-bar']").on("keyup", function() {
+  $("input[name='search-bar']").on("keyup", function () {
     searchKey = $(this).val();
     if (searchKey.trim() !== "") {
       $.ajax({
         url: `/api/searchCategories?k=${searchKey}`,
         type: "GET",
-        success: function(response) {
+        success: function (response) {
           $(".search-results").empty();
-          response.forEach(function(category) {
-            $(".search-results").append($(`<div><a href="/index.html?p=0&f=date&c=${category.name}">${category.name}</a></div>`));
+          response.forEach(function (category) {
+            $(".search-results").append(
+              $(
+                `<div><a href="/index.html?p=0&f=date&c=${category.name}">${category.name}</a></div>`
+              )
+            );
           });
         },
-        error: function() {
+        error: function () {
           $(".search-results").empty();
           $(".search-results").append($("<div>").text("Error occured."));
-        }
+        },
       });
     } else {
       $(".search-results").empty();
     }
   });
 
- $(".search").submit(function (event) {
-  event.preventDefault();
-  window.location.href = `/index.html?p=0&f=date&c=${searchKey}`
-  })
-  
+  $(".search").submit(function (event) {
+    event.preventDefault();
+    window.location.href = `/index.html?p=0&f=date&c=${searchKey}`;
+  });
 });

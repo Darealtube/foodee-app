@@ -82,7 +82,7 @@ $(document).ready(function () {
       .removeClass("error")
       .removeClass("success"); // Reset the status message display
     $(".status-popup").addClass("popup-active");
-    $("#status-message").text("Creating post...");
+    $("#status-message").text("Editing post...");
 
     $.ajax({
       method: "PUT",
@@ -96,7 +96,7 @@ $(document).ready(function () {
           .removeClass("error")
           .removeClass("success"); // Reset the status message display
         $(".status-popup").addClass("popup-active").addClass("success");
-        $("#status-message").text("Login Success! Redirecting to homepage...");
+        $("#status-message").text("Editing Success! Redirecting to homepage...");
         setTimeout(() => {
           window.location.href = "/index.html";
           $(".status-popup").removeClass("popup-active").removeClass("success");

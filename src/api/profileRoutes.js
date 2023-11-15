@@ -1,7 +1,9 @@
 const User = require("../../schemas/UserSchema");
 const express = require("express");
 const router = express.Router();
-var passport = require("passport")
+const upload = require("../../multer");
+var passport = require("passport");
+const imageUploader = require("../../imageUploader");
 // Gets the information of a single user profile (PROVEN TO WORK PROPERLY)
 router.get("/api/profile", async (req, res) => {
   let profile = req.query.p; // USER NAME
@@ -18,18 +20,17 @@ router.get("/api/profile", async (req, res) => {
 // Updates the information of a single user profile (PROVEN TO WORK PROPERLY)
 router.put(
   "/api/profile",
-  passport.authenticate("jwt", { session: false }), // Add this to add an authentication layer to the API. It checks if the user is logged in.
+  passport.authenticate("jwt", { session: false }),
+  upload.any(), // Add this to add an authentication layer to the API. It checks if the user is logged in.
   async (req, res) => {
-    let { profile, address, bio, pfp, header } = req.body;
-
-    if (profile != req.user.name) {
-      res
-        .status(401)
-        .json({ error: "You are not allowed to edit this profile." });
-    }
-
+    let { address, bio } = req.body;
     try {
-      await User.updateOne({ name: profile }, { address, bio, pfp, header });
+      const pfp = await imageUploader(req.files[0]);
+      const header = await imageUploader(req.files[1]);
+      await User.updateOne(
+        { name: req.user.name },
+        { address, bio, ...(pfp && { pfp }), ...(header && { header }) }
+      );
       res.json({ message: "User updated successfully." }).status(200);
     } catch (error) {
       res
@@ -62,7 +63,5 @@ router.delete(
     }
   }
 );
-
-
 
 module.exports = router;
