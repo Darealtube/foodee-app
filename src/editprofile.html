@@ -16,7 +16,7 @@
     />
     <link rel="stylesheet" href="./styles/profile.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="./scripts/profile.js"></script>
+    <script src="./scripts/editprofile.js"></script>
   </head>
 
   <body>
@@ -51,13 +51,13 @@
       <div class="profile-details">
         <div class="backdrop-container">
           <span
-            class="material-symbols-outlined"
+            class="material-symbols-outlined attach-header"
             style="position: absolute; cursor: pointer"
           >
             photo_camera
           </span>
-          <input id="pfp-input" type="file" style="display: none" />
-          <img src="" alt="" class="backdrop-img" width="100%" height="100%" />
+          <input id="header-input" type="file" style="display: none" />
+          <img src="" alt="" class="header-img" width="100%" height="100%" />
         </div>
         <div class="profile-details-container">
           <div class="main-details">
@@ -70,7 +70,7 @@
                 class="profile-img"
               />
               <span
-                class="material-symbols-outlined"
+                class="material-symbols-outlined attach-pfp"
                 style="position: absolute; cursor: pointer"
               >
                 photo_camera
@@ -79,8 +79,12 @@
             </div>
             <div style="display: flex; flex-direction: column">
               <h1 class="profile-name"></h1>
-              <a class="edit" id="cancel"><p>Cancel Edit</p></a>
-              <a class="edit" id="done"><p>Done</p></a>
+              <div style="display: flex">
+                <a class="edit" id="cancel"><p>Cancel Edit</p></a>
+                <a class="edit" id="done" style="margin-left: 8px"
+                  ><p>Done</p></a
+                >
+              </div>
             </div>
           </div>
         </div>
@@ -103,14 +107,12 @@
               />
             </div>
           </div>
-
-
+        </div>
       </div>
-    </div>
-  </main>
+    </main>
 
-  <div class="status-popup">
-    <h4 id="status-message"></h4>
-  </div>
-</body>
+    <div class="status-popup">
+      <h4 id="status-message"></h4>
+    </div>
+  </body>
 </html>

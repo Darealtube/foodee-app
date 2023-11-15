@@ -57,7 +57,7 @@
           <div class="main-details">
             <div class="pfp-container">
               <img
-                src="./public/images/pfp-02.png"
+                src=""
                 alt="pfp"
                 width="100%"
                 height="100%"
@@ -66,7 +66,9 @@
             </div>
             <div style="display: flex; flex-direction: column">
               <h1 class="profile-name"></h1>
-              <a id="edit-profile" class="edit"><p>Edit Profile</p></a>
+              <a id="edit-profile" class="edit" href="/editprofile.html"
+                ><button>Edit Profile</button></a
+              >
             </div>
           </div>
         </div>
@@ -78,34 +80,31 @@
 
             <p class="more-text" id="location"></p>
             <p class="more-text" id="studied"></p>
-
           </div>
-  
 
           <div class="profile-posts">
-
-              <span
-                style="
-                  display: flex;
-                  align-items: center;
-                  flex-grow: 1;
-                  margin-left: 8px;
-                "
-              >
-                <p style="margin-right: 8px">Sort By:</p>
-                <select class="post-filters">
-                  <option value="date">Date</option>
-                  <option value="likes">Likes</option>
-                </select>
-                <div class="material-symbols-outlined prev-pages"> arrow_back </div>
-                <div class="material-symbols-outlined next-pages"> arrow_forward </div>
-              </span>
+            <span
+              style="
+                display: flex;
+                align-items: center;
+                flex-grow: 1;
+                margin-left: 8px;
+              "
+            >
+              <p style="margin-right: 8px">Sort By:</p>
+              <select class="post-filters">
+                <option value="date">Date</option>
+                <option value="likes">Likes</option>
+              </select>
+              <div class="material-symbols-outlined prev-pages">arrow_back</div>
+              <div class="material-symbols-outlined next-pages">
+                arrow_forward
+              </div>
+            </span>
 
             <div class="post-list">
               <!-- List of all containers -->
               <!-- For dynamic content -->
-              <!-- Container 1 -->
-              <div class="container"></div>
             </div>
           </div>
         </div>

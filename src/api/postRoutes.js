@@ -5,7 +5,7 @@ const Categories = require("../../schemas/CategorySchema");
 const passport = require("passport");
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const cloudinary = require("../../imageUploader");
+const imageUploader = require("../../imageUploader");
 const upload = require("../../multer");
 const router = express.Router();
 
@@ -116,18 +116,7 @@ router.put(
     const { title, caption, location, categories } = req.body;
 
     try {
-      var imageURI = null;
-      if (req.files[0]) {
-        const { buffer, mimetype } = req.files[0];
-        const b64 = Buffer.from(buffer).toString("base64");
-        const imageData = "data:" + mimetype + ";base64," + b64;
-        imageURI = await cloudinary.uploader.upload(imageData, {
-          resource_type: "auto",
-          upload_preset: "ml_default",
-          folder: "foodee",
-        });
-      }
-
+      const postImgURL = await imageUploader(req.files[0]);
       const oldPost = await Post.findById(post);
 
       if (oldPost.author != req.user.name) {
@@ -139,7 +128,7 @@ router.put(
       const newPost = await Post.findOneAndUpdate(
         { _id: post },
         {
-          ...(imageURI && { post_img: imageURI.secure_url }),
+          ...(postImgURL && { post_img: postImgURL }),
           caption,
           location,
           categories: categories.split(",").map((cat) => cat.trim()),
@@ -186,20 +175,12 @@ router.post(
   async (req, res) => {
     let author = req.user; // Logged in user
     const { title, caption, location, categories } = req.body;
-    const { buffer, mimetype } = req.files[0];
-
-    const b64 = Buffer.from(buffer).toString("base64");
-    let dataURI = "data:" + mimetype + ";base64," + b64;
 
     try {
-      const result = await cloudinary.uploader.upload(dataURI, {
-        resource_type: "auto",
-        upload_preset: "ml_default",
-        folder: "foodee",
-      });
+      const postImgURL = await imageUploader(req.files[0]);
 
       await Post.create({
-        post_img: result.secure_url,
+        post_img: postImgURL,
         title,
         caption,
         location,
