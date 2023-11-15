@@ -196,16 +196,7 @@ $(document).ready(function () {
         console.log(commentAuthor);
 
         // Check if the logged-in user is the author of the current comment
-        if (loggedInUser.name === commentAuthor) {
-          // Append the edit comment link
-          $(".comment:last-child").append(
-            $(
-              `<a class="comment-edit" id="edit"><p>Edit</p></a>
-            <a class="comment-delete" id="delete"><p>Delete</p></a>
-              `
-            )
-          );
-        }
+
       }
     } catch (error) {
       console.error(
