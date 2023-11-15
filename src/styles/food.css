@@ -320,6 +320,7 @@ main {
 .comment-msg {
   display: flex;
   flex-direction: column;
+  flex-basis: 73%;
 }
 
 .comment-author-pfp {
