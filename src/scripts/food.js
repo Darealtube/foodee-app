@@ -1,7 +1,25 @@
 $(document).ready(function () {
   var urlQuery = new URLSearchParams(window.location.search);
-  var loggedInUser = null;
   let postId = urlQuery.get("p") || 0;
+
+  var loggedInUser = null;
+
+  const getLoggedInUser = () => {
+    $.ajax({
+      method: "GET",
+      url: `/api/session`,
+      cache: true,
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (data) => {loggedInUser = data; 
+        console.log(loggedInUser);
+      },
+      error: (error) => {console.error("Error fetching logged in user information:", error);},
+    });
+  };
+
+  getLoggedInUser();
+  console.log(loggedInUser);
   
   // LOAD SINGLE POST
   const getSinglePost = () => {
