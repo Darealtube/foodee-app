@@ -435,3 +435,12 @@ button {
 #create_post:hover {
   color: #3b7e2e;
 }
+
+.pagination {
+  text-align: center;
+}
+
+#prev, #next {
+  height: 30px;
+  width: 30px;
+}
