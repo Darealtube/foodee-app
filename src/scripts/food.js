@@ -10,12 +10,9 @@ $(document).ready(function () {
       dataType: "json",
       success: (data) => {
         $(".food-img img").attr("src", data.post_img);
+        $(".food-title").text(data.title);
         $(".author-name").text(data.author);
-
-        // not working
         $(".author-details img").attr("src", data.authorPFP);
-        // -----------
-
         $(".food-description").text(data.caption);
         $(".food-location").text(data.location);
 
@@ -24,20 +21,56 @@ $(document).ready(function () {
 
         $(".post-date").text(dateOnly);
       },
-      error: () => {
-        console.error("error");
+      error: ({ responseJSON }) => {
+        // Show the status popup saying that the get single post has failed
+        $(".status-popup").addClass("popup-active").addClass("error");
+        $("#status-message").text(responseJSON.error);
+        setTimeout(() => {
+          $(".status-popup").removeClass("popup-active").removeClass("error");
+        }, 2000);
       },
     });
   };
   getSinglePost();
 
-  // GET COMMENTS
-
-  // EDIT POST
-  // $("#edit-post").click(function () {
-
-  // });
-
+  // GET POST COMMENTS
+  const getPostComments = () => {
+    $.ajax({
+      method: "GET",
+      url: `/api/comments/?p=${postId}`,
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (data) => {
+        console.log(data);
+        for(let i=0; i<data.length; i++){
+          $(".food-comments").append($(
+            `<div class="comment">
+              <img
+                src="${data[i].authorPFP}"
+                alt=""
+                height="32px"
+                width="32px"
+                class="comment-author-pfp"
+              />
+              <div class="comment-msg">
+                <h6 class="comment-author">${data[i].author}</h6>
+                <p class="comment-text">${data[i].message}</p>
+              </div>
+            </div>`
+          ));
+        }
+      },
+      error: ({ responseJSON }) => {
+        // Show the status popup saying that the get single post has failed
+        $(".status-popup").addClass("popup-active").addClass("error");
+        $("#status-message").text(responseJSON.error);
+        setTimeout(() => {
+          $(".status-popup").removeClass("popup-active").removeClass("error");
+        }, 2000);
+      },
+    })
+  }
+  getPostComments();
   // START OF APPBAR
   const appBar = (loggedInUser) => {
     if (!loggedInUser) {

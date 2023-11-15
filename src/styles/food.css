@@ -270,6 +270,10 @@ main {
   font-family: Roboto;
 }
 
+.food-title {
+  margin-top: 10px;
+}
+
 .author-details {
   display: flex;
   align-items: center;

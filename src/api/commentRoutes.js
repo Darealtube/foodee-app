@@ -1,7 +1,7 @@
 const Comment = require("../../schemas/CommentSchema");
+const User = require("../../schemas/UserSchema");
 const express = require("express");
 const router = express.Router();
-
 const commentPerPage = 10; // This can be changed
 var passport = require("passport")
 // Displays all comments on a post (PROVEN TO WORK PROPERLY)
