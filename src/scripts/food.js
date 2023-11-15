@@ -1,6 +1,7 @@
 $(document).ready(function () {
   var urlQuery = new URLSearchParams(window.location.search);
   let postId = urlQuery.get("p") || 0;
+  
   // LOAD SINGLE POST
   const getSinglePost = () => {
     $.ajax({
@@ -32,6 +33,8 @@ $(document).ready(function () {
     });
   };
   getSinglePost();
+
+  // START OF COMMENTS
 
   // GET POST COMMENTS
   const getPostComments = () => {
@@ -71,6 +74,32 @@ $(document).ready(function () {
     })
   }
   getPostComments();
+
+
+  // ADD POST COMMENTS
+
+  $(".comment-button").click(function () {  
+      const message = $(".comment-input").val(); 
+      const author = "Darryl Javier";
+      const post = postId;
+
+      $.ajax({
+        method: "POST",
+        url: `/api/comments`,
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({message, author, post}),
+        success: (data) => {
+          console.log(data);
+        },
+        error: () => {
+          console.error("error");
+        }
+     })
+
+  })
+
+  // END OF COMMENTS
+
   // START OF APPBAR
   const appBar = (loggedInUser) => {
     if (!loggedInUser) {

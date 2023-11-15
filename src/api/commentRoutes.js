@@ -34,7 +34,7 @@ router.post("/api/comments", async (req, res) => {
   let author = req.body.author;
 
   try {
-    await Comment.create({ post, author: "Darryl Javier", message }); // Darryl Javier for the meantime
+    await Comment.create({ post, author, message }); // Darryl Javier for the meantime
     res.json({ message: "Comment created successfully." }).status(200);
   } catch (error) {
     res
