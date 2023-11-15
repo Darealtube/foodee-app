@@ -215,7 +215,5 @@ $(document).ready(function () {
   event.preventDefault();
   window.location.href = `/index.html?p=0&f=date&c=${searchKey}`
   })
-
-  
   
 });
