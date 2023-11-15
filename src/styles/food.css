@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto:wght@400;500;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&family=Young+Serif&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&family=Young+Serif&display=swap");
 
 html {
   zoom: 110%;
@@ -161,6 +161,16 @@ main {
   height: 100%;
 }
 
+.post-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.liked {
+  color: red;
+}
+
 .food-main {
   margin-left: 10px;
   display: flex;
@@ -236,8 +246,7 @@ main {
 }
 
 .food-title {
-  font-size: 30px;
-  padding-bottom: 12px;
+  margin-top: 10px;
 }
 
 .food-comments {
@@ -313,7 +322,7 @@ main {
   margin: 0;
 }
 
-.edit-comment{
+.edit-comment {
   display: inline-block;
   width: 30px;
   padding: 1px 20px;
@@ -326,7 +335,7 @@ main {
   font-family: Arial, Helvetica, sans-serif;
   bottom: 0;
   left: 0;
-  margin-left:auto;
+  margin-left: auto;
 
   &:hover {
     background-color: #1d3124;
@@ -398,7 +407,7 @@ button {
   color: #001011;
 }
 
-#add_photo{
+#add_photo {
   transition: 0.3s ease-in-out;
 }
 
@@ -437,10 +446,13 @@ button {
 }
 
 .pagination {
-  text-align: center;
+  text-align: right;
+  position: absolute;
+  top: 525px;
+  left: 136px;
 }
 
 #prev, #next {
-  height: 30px;
+  height: 20px;
   width: 30px;
 }
