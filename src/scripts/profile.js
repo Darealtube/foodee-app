@@ -3,12 +3,37 @@ $(document).ready(() => {
   const postData = []; // Hashmap for post data sorted by date
   const postLikesData = []; // Hashmap for post data sorted by likes
   
-  var user = urlQuery.get("p");
+  var user = urlQuery.get("u");
+  var loggedInUser = null;
+
   let filter = urlQuery.get("f") || "date";
   let page = urlQuery.get("p") || 0;
   let endPage;
 
   const likedPosts = new Set();
+
+  const editProfileLink = document.getElementById("edit-profile");
+
+
+    const getLoggedInUser = () => {
+      $.ajax({
+        method: "GET",
+        url: `/api/session`,
+        cache: true,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: (data) => {loggedInUser = data;
+          if(loggedInUser.name != user) {
+            editProfileLink.remove();
+          }
+        },
+        error: (error) => {console.error("Error fetching logged in user information:", error);},
+      });
+    };
+
+    getLoggedInUser();
+
+
 
     const getUserInfo = () => {
       $.ajax({
@@ -145,6 +170,8 @@ $(document).ready(() => {
   });
 
   $(".next-pages").click(function () {
+    console.log(page);
+    console.log(endPage);
     if (endPage != page) {
       // It checks first if the page isn't the last page (as far as the cache goes)
       page += 1;
@@ -171,6 +198,7 @@ $(document).ready(() => {
 
   // When the user clicks previous page,
   $(".prev-pages").click(function () {
+    console.log(page);
     if (page != 0) {
       // It checks first if the page is not the first page
       page -= 1;
@@ -195,6 +223,45 @@ $(document).ready(() => {
     }
   });
 
+
+  $("#edit-profile").click(function (loggedInUser) {
+    const newUrl = `http://localhost:3000/editprofile.html?u=${user}`;
+    window.location.href = newUrl;
+  });
+
+  $("#cancel").click(function () {
+    const newUrl = `http://localhost:3000/profile.html?u=${user}`;
+    window.location.href = newUrl;
+  });
+
+  $("#done").click(function () {
+      // Extract values from the text area and input field
+      const bioValue = $("#bio").val();
+      const locationValue = $("#location").val();
+
+      // Replace these values with your actual data
+      const profileData = {
+        address: locationValue,
+        bio: bioValue,
+      };
+
+      $.ajax({
+        method: "PUT",
+        url: "/api/profile",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: JSON.stringify(profileData),
+        success: (response) => {
+          console.log("Profile updated successfully:", response);
+        },
+        error: (error) => {
+          console.error("Error updating profile:", error);
+        }
+      });
+
+
+  });
+
   // START OF APPBAR
   const appBar = (loggedInUser) => {
     if (!loggedInUser) {
@@ -204,7 +271,7 @@ $(document).ready(() => {
 
     return `
     <div class="pfp">
-      <a href='profile.html?p=${loggedInUser.name}'>
+      <a href='profile.html?u=${loggedInUser.name}'>
         <img
           src="${loggedInUser.pfp}"
           width="32px"
@@ -261,4 +328,33 @@ $(document).ready(() => {
     logout();
   });
   // END OF LOGOUT
+
+  var searchKey;
+  $("input[name='search-bar']").on("keyup", function() {
+    searchKey = $(this).val();
+    if (searchKey.trim() !== "") {
+      $.ajax({
+        url: `/api/searchCategories?k=${searchKey}`,
+        type: "GET",
+        success: function(response) {
+          $(".search-results").empty();
+          response.forEach(function(category) {
+            $(".search-results").append($(`<div><a href="/index.html?p=0&f=date&c=${category.name}">${category.name}</a></div>`));
+          });
+        },
+        error: function() {
+          $(".search-results").empty();
+          $(".search-results").append($("<div>").text("Error occured."));
+        }
+      });
+    } else {
+      $(".search-results").empty();
+    }
+  });
+
+ $(".search").submit(function (event) {
+  event.preventDefault();
+  window.location.href = `/index.html?p=0&f=date&c=${searchKey}`
+  })
+  
 });

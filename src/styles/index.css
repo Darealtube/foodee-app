@@ -60,12 +60,6 @@ form.search::after {
   display: table;
 }
 
-form select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
 #add-button {
   transition: 0.3s ease-in-out;
 }

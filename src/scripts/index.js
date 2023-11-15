@@ -284,7 +284,7 @@ $(document).ready(() => {
 
     return `
     <div class="pfp">
-      <a href='profile.html?p=${loggedInUser.name}'>
+      <a href='profile.html?u=${loggedInUser.name}'>
         <img
           src="${loggedInUser.pfp}"
           width="32px"
@@ -370,21 +370,4 @@ $(document).ready(() => {
   window.location.href = `/index.html?p=0&f=date&c=${searchKey}`
 })
 
- /* $(".search").submit(function(event) {
-    event.preventDefault();
-    var uInput = $("input[name='search-bar']").searchKey(); // Get user input
-    $.ajax({
-      url: "/api/searchCategories",
-      method: "POST",
-      data: { k: uInput },
-      success: function(response) {
-        if (response.matchFound) {
-          // What should be the format of the link?
-        }
-      },
-      error: function() {
-        // Handle error case
-      }
-    });
-  }); */
 });
