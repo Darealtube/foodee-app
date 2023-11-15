@@ -340,7 +340,7 @@ $(document).ready(function () {
 
   // Function to fetch comments for the current page
   function getComments() {
-    let postId = '6554a0e0082efe73ef4eb1a6'; // Replace with your actual post ID
+    let postId = '6549c8654db02ad1ebb701c4'; // Replace with your actual post ID
 
     $.ajax({
       url: `/api/comments?p=${postId}&cp=${currentPage}`,
@@ -377,7 +377,7 @@ $(document).ready(function () {
   getComments();
 
   // Event listener for previous button
-  $('#prev').on('click', function() {
+  $(".pagination #prev").click(function() {
     if (currentPage > 0) {
       currentPage--;
       getComments();
@@ -385,14 +385,14 @@ $(document).ready(function () {
   });
 
   // Event listener for next button
-  $('#next').on('click', function() {
+  $(".pagination #next").click(function() {
     currentPage++;
     getComments();
   });
 
   // Event listener for comment submission
   $('.comment-button').on('click', function() {
-    let post = '6554a0e0082efe73ef4eb1a6'; // Replace with your actual post ID
+    let post = '6549c8654db02ad1ebb701c4'; // Replace with your actual post ID
     let message = $('.comment-input').val();
     let author = 'Darryl Javier'; // Replace with the actual author name
 
