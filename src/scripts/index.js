@@ -94,7 +94,7 @@ $(document).ready(() => {
   $(".post-filter").change(function () {
     resetPosts(); // It will reset the posts first
 
-    filter = $(this).searchKey();
+    filter = $(this).val();
     page = 0;
 
     // Then finds out which filter it is
