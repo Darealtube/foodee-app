@@ -307,8 +307,92 @@ $(document).ready(function () {
     }
   });
 
-  $(".search").submit(function (event) {
-    event.preventDefault();
-    window.location.href = `/index.html?p=0&f=date&c=${searchKey}`;
+ $(".search").submit(function (event) {
+  event.preventDefault();
+  window.location.href = `/index.html?p=0&f=date&c=${searchKey}`
+  })
+  
+
+
+
+  ///////////////////////////////////////////// Comment Pagination (Kindly debug this code)
+  let currentPage = 0;
+
+  // Function to fetch comments for the current page
+  function getComments() {
+    let postId = '6554a0e0082efe73ef4eb1a6'; // Replace with your actual post ID
+
+    $.ajax({
+      url: `/api/comments?p=${postId}&cp=${currentPage}`,
+      method: 'GET',
+      success: function(response) {
+        if (response.length > 0) {
+          $('.comment-list').empty();
+
+          response.forEach(function(comment) {
+            let commentElem = `
+              <div class="comment">
+                <img src="" alt="" height="32px" width="32px" class="comment-author-pfp" />
+                <div class="comment-msg">
+                  <h6 class="comment-author">${comment.author}</h6>
+                  <p class="comment-text">${comment.message}</p>
+                </div>
+              </div>
+            `;
+
+            $('.comment-list').append(commentElem);
+          });
+
+          $('#prev').prop('disabled', currentPage === 0);
+          $('#next').prop('disabled', response.length < 10);
+        }
+      },
+      error: function() {
+        console.log('Error occurred while fetching comments.');
+      }
+    });
+  }
+
+  // Fetch comments for the initial page
+  getComments();
+
+  // Event listener for previous button
+  $('#prev').on('click', function() {
+    if (currentPage > 0) {
+      currentPage--;
+      getComments();
+    }
   });
+
+  // Event listener for next button
+  $('#next').on('click', function() {
+    currentPage++;
+    getComments();
+  });
+
+  // Event listener for comment submission
+  $('.comment-button').on('click', function() {
+    let post = '6554a0e0082efe73ef4eb1a6'; // Replace with your actual post ID
+    let message = $('.comment-input').val();
+    let author = 'Darryl Javier'; // Replace with the actual author name
+
+    if (message !== '') {
+      $.ajax({
+        url: '/api/comments',
+        method: 'POST',
+        data: { post, message, author },
+        success: function(response) {
+          console.log(response.message);
+          // Clear the comment input field
+          $('.comment-input').val('');
+          // Fetch comments for the current page
+          getComments();
+        },
+        error: function() {
+          console.log('Error occurred while creating comment.');
+        }
+      });
+    }
+  });
+  ///////////////////////////////////////////////////////////////////////
 });
