@@ -71,6 +71,19 @@ p {
   color: #f6f4e8;
 }
 
+.search-results {
+  background-image: url(../public/images/backdrop-03.png);
+  background-size: 300px 300px;
+  position: absolute;
+  font-family: "Indie Flower";
+  top: 50px;
+  text-align: center;
+  width: 232px;
+  box-shadow: 2px 2px 2px gray;
+  border-color: #1d3124;
+  border-radius: 3%;
+}
+
 .pfp {
   width: 32px;
   height: 32px;

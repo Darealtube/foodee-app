@@ -261,4 +261,33 @@ $(document).ready(() => {
     logout();
   });
   // END OF LOGOUT
+
+  var searchKey;
+  $("input[name='search-bar']").on("keyup", function() {
+    searchKey = $(this).val();
+    if (searchKey.trim() !== "") {
+      $.ajax({
+        url: `/api/searchCategories?k=${searchKey}`,
+        type: "GET",
+        success: function(response) {
+          $(".search-results").empty();
+          response.forEach(function(category) {
+            $(".search-results").append($(`<div><a href="/index.html?p=0&f=date&c=${category.name}">${category.name}</a></div>`));
+          });
+        },
+        error: function() {
+          $(".search-results").empty();
+          $(".search-results").append($("<div>").text("Error occured."));
+        }
+      });
+    } else {
+      $(".search-results").empty();
+    }
+  });
+
+ $(".search").submit(function (event) {
+  event.preventDefault();
+  window.location.href = `/index.html?p=0&f=date&c=${searchKey}`
+  })
+  
 });
