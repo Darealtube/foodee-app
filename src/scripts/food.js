@@ -211,19 +211,32 @@ $(document).ready(function () {
     const author = "Darryl Javier";
     const post = postId;
 
-    $.ajax({
-      method: "POST",
-      url: `/api/comments`,
-      contentType: "application/json; charset=utf-8",
-      data: JSON.stringify({ message, author, post }),
-      success: (data) => {
-        console.log(data);
-      },
-      error: () => {
-        console.error("error");
-      },
-    });
-  });
+      $.ajax({
+        method: "POST",
+        url: `/api/comments`,
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({message, author, post}),
+        success: (data) => {
+          // Show the status popup saying that the user has been logged in successfully
+          $(".status-popup").addClass("popup-active").addClass("success");
+          $("#status-message").text(data.message);
+          setTimeout(() => {
+            window.location.reload();
+            $(".comment-input").text("");
+            $(".status-popup").removeClass("popup-active").removeClass("success");
+          }, 2000);
+        },
+        error: () => {
+          // Show the status popup saying that the login/signup has failed
+          $(".status-popup").addClass("popup-active").addClass("error");
+          $("#status-message").text(responseJSON.error);
+          setTimeout(() => {
+            $(".status-popup").removeClass("popup-active").removeClass("error");
+          }, 2000);
+        }
+     })
+
+  })
 
   // END OF COMMENTS
 
