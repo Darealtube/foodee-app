@@ -136,6 +136,26 @@ $(document).ready(function () {
 
   getSinglePost();
 
+  const getLoggedInUser = () => {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        method: "GET",
+        url: `/api/session`,
+        cache: true,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: (data) => {
+          console.log(data);
+          resolve(data); // Resolve the promise with the logged-in user data
+        },
+        error: (error) => {
+          console.error("Error fetching logged in user information:", error);
+          reject(error); // Reject the promise with the error
+        },
+      });
+    });
+  };
+
   // START OF COMMENTS
 
   // GET POST COMMENTS
