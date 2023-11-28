@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const CommentSchema = new Schema({
   author: String,
+  authorPFP: String,
   post: mongoose.Schema.Types.ObjectId,
   date_created: {
     type: Date,

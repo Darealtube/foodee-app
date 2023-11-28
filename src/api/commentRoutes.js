@@ -1,9 +1,8 @@
 const Comment = require("../../schemas/CommentSchema");
-const User = require("../../schemas/UserSchema");
 const express = require("express");
 const router = express.Router();
 const commentPerPage = 3; // This can be changed
-var passport = require("passport")
+var passport = require("passport");
 // Displays all comments on a post (PROVEN TO WORK PROPERLY)
 router.get("/api/comments", async (req, res) => {
   // Get the post (p) id in the request url parameter
@@ -13,11 +12,10 @@ router.get("/api/comments", async (req, res) => {
 
   try {
     const comments = await Comment.find({ post: postId })
+      .sort({ date_created: -1 })
       .skip(pageOffset)
-      .limit(commentPerPage)
-      .sort({ date_created: -1 });
+      .limit(commentPerPage);
 
-    console.log(comments);
     res.json(comments).status(200);
   } catch (error) {
     res
@@ -32,9 +30,10 @@ router.post("/api/comments", async (req, res) => {
   let post = req.body.post;
   let message = req.body.message;
   let author = req.body.author;
+  let authorPFP = req.body.authorPFP;
 
   try {
-    await Comment.create({ post, author, message }); // Darryl Javier for the meantime
+    await Comment.create({ post, author, message, authorPFP }); // Darryl Javier for the meantime
     res.json({ message: "Comment created successfully." }).status(200);
   } catch (error) {
     res

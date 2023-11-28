@@ -482,15 +482,16 @@ button {
   color: #3b7e2e;
 }
 
-.pagination {
-  text-align: right;
-  position: absolute;
-  top: 560px;
-  left: 136px;
+.prev-page,
+.next-page {
+  user-select: none;
+  cursor: pointer;
+  margin-right: 8px;
+  color: #001011;
+  transition: color 250ms ease-in-out;
 }
 
-#prev,
-#next {
-  height: 30px;
-  width: 30px;
+.prev-page:hover,
+.next-page:hover {
+  color: #e59560;
 }

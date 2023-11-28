@@ -135,69 +135,58 @@ $(document).ready(function () {
   };
 
   getSinglePost();
-
-  const getLoggedInUser = () => {
-    return new Promise((resolve, reject) => {
-      $.ajax({
-        method: "GET",
-        url: `/api/session`,
-        cache: true,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: (data) => {
-          console.log(data);
-          resolve(data); // Resolve the promise with the logged-in user data
-        },
-        error: (error) => {
-          console.error("Error fetching logged in user information:", error);
-          reject(error); // Reject the promise with the error
-        },
-      });
-    });
-  };
-
   // START OF COMMENTS
 
   // GET POST COMMENTS
+
+  let commentData = {};
+  let commentPage = urlQuery.get("cp") || 0;
+  let endCommentPage;
+
+  const resetComments = () => {
+    $(".food-comments").find(".comment").remove();
+  };
+
+  const appendComments = (comments) => {
+    for (let i = 0; i < comments.length; i++) {
+      $(".food-comments").append(
+        $(
+          `<div class="comment">
+          <img
+            src="${comments[i].authorPFP}"
+            alt=""
+            height="32px"
+            width="32px"
+            class="comment-author-pfp"
+          />
+          <div class="comment-msg">
+
+            <div style="display: flex;">
+              <h6 class="comment-author" style="margin-right: 8px;">${
+                comments[i].author
+              }</h6>
+              <h6>${comments[i].date_created.split("T")[0]}</h6>
+            </div>
+            <p class="comment-text">${comments[i].message}</p>
+          </div>`
+        )
+      );
+    }
+  };
+
   const getPostComments = async () => {
     try {
-      const loggedInUser = await getLoggedInUser(); // Assuming getLoggedInUser returns a Promise
-
-      const comments = await $.ajax({
+      $.ajax({
         method: "GET",
-        url: `/api/comments/?p=${postId}`,
+        url: `/api/comments/?p=${postId}&cp=${commentPage}`,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        success: (data) => {
+          if (data.length < 1) endCommentPage = commentPage;
+          commentData[commentPage] = data;
+          appendComments(data);
+        },
       });
-
-      console.log(comments);
-
-      for (let i = 0; i < comments.length; i++) {
-        const commentAuthor = comments[i].author;
-
-        $(".food-comments").append(
-          $(
-            `<div class="comment">
-            <img
-              src="${loggedInUser.pfp}"
-              alt=""
-              height="32px"
-              width="32px"
-              class="comment-author-pfp"
-            />
-            <div class="comment-msg">
-              <h6 class="comment-author">${commentAuthor}</h6>
-              <p class="comment-text">${comments[i].message}</p>
-            </div>`
-          )
-        );
-
-        console.log(loggedInUser);
-        console.log(commentAuthor);
-
-        // Check if the logged-in user is the author of the current comment
-
-      }
     } catch (error) {
       console.error(
         "Error fetching comments or logged-in user information:",
@@ -208,17 +197,49 @@ $(document).ready(function () {
 
   getPostComments();
 
+  // When the user clicks next page,
+  $(".next-page").click(function () {
+    if (endCommentPage != commentPage) {
+      // It checks first if the page isn't the last page (as far as the cache goes)
+      commentPage += 1;
+      resetComments(); // Then it resets the posts
+
+      if (commentData[commentPage] == null) {
+        getPostComments();
+      } else {
+        const data = commentData[commentPage];
+        appendComments(data);
+      }
+    }
+  });
+
+  // When the user clicks previous page,
+  $(".prev-page").click(function () {
+    if (commentPage != 0) {
+      // It checks first if the page is not the first page
+      commentPage -= 1;
+      resetComments(); // Then it resets the posts
+      if (commentData[commentPage] == null) {
+        getPostComments();
+      } else {
+        const data = commentData[commentPage];
+        appendComments(data);
+      }
+    }
+  });
+
   // ADD POST COMMENTS
   $(".comment-button").click(function () {
     const message = $(".comment-input").val();
-    const author = "darryl_javier@dlsu.edu.ph";
+    const author = loggedInUser.name;
     const post = postId;
+    const authorPFP = loggedInUser.pfp;
 
     $.ajax({
       method: "POST",
       url: `/api/comments`,
       contentType: "application/json; charset=utf-8",
-      data: JSON.stringify({ message, author, post }),
+      data: JSON.stringify({ message, author, post, authorPFP }),
       success: (data) => {
         // Show the status popup saying that the user has been logged in successfully
         $(".status-popup").addClass("popup-active").addClass("success");
@@ -239,23 +260,6 @@ $(document).ready(function () {
       },
     });
   });
-
-  $(".food-comments").on("click", ".comment-delete", function () {
-    const commentId = $(this).closest(".comment").attr("id");
-    $.ajax({
-      method: "DELETE",
-      url: "/api/comments",
-      data: { comment: commentId },
-      dataType: "json",
-      success: function (response) {
-        console.log(response.message);
-      },
-      error: function (error) {
-        console.error("Error deleting comment:", error.responseJSON.error);
-      },
-    });
-  });
-
   // END OF COMMENTS
 
   // START OF LOGOUT
@@ -318,92 +322,8 @@ $(document).ready(function () {
     }
   });
 
- $(".search").submit(function (event) {
-  event.preventDefault();
-  window.location.href = `/index.html?p=0&f=date&c=${searchKey}`
-  })
-  
-
-
-
-  ///////////////////////////////////////////// Comment Pagination (Kindly debug this code)
-  let currentPage = 0;
-
-  // Function to fetch comments for the current page
-  function getComments() {
-    let postId = '6549c8654db02ad1ebb701c4'; // Replace with your actual post ID
-
-    $.ajax({
-      url: `/api/comments?p=${postId}&cp=${currentPage}`,
-      method: 'GET',
-      success: function(response) {
-        if (response.length > 0) {
-          $('.comment-list').empty();
-
-          response.forEach(function(comment) {
-            let commentElem = `
-              <div class="comment">
-                <img src="" alt="" height="32px" width="32px" class="comment-author-pfp" />
-                <div class="comment-msg">
-                  <h6 class="comment-author">${comment.author}</h6>
-                  <p class="comment-text">${comment.message}</p>
-                </div>
-              </div>
-            `;
-
-            $('.comment-list').append(commentElem);
-          });
-
-          $('#prev').prop('disabled', currentPage === 0);
-          $('#next').prop('disabled', response.length < 10);
-        }
-      },
-      error: function() {
-        console.log('Error occurred while fetching comments.');
-      }
-    });
-  }
-
-  // Fetch comments for the initial page
-  getComments();
-
-  // Event listener for previous button
-  $(".pagination #prev").click(function() {
-    if (currentPage > 0) {
-      currentPage--;
-      getComments();
-    }
+  $(".search").submit(function (event) {
+    event.preventDefault();
+    window.location.href = `/index.html?p=0&f=date&c=${searchKey}`;
   });
-
-  // Event listener for next button
-  $(".pagination #next").click(function() {
-    currentPage++;
-    getComments();
-  });
-
-  // Event listener for comment submission
-  $('.comment-button').on('click', function() {
-    let post = '6549c8654db02ad1ebb701c4'; // Replace with your actual post ID
-    let message = $('.comment-input').val();
-    let author = 'Darryl Javier'; // Replace with the actual author name
-
-    if (message !== '') {
-      $.ajax({
-        url: '/api/comments',
-        method: 'POST',
-        data: { post, message, author },
-        success: function(response) {
-          console.log(response.message);
-          // Clear the comment input field
-          $('.comment-input').val('');
-          // Fetch comments for the current page
-          getComments();
-        },
-        error: function() {
-          console.log('Error occurred while creating comment.');
-        }
-      });
-    }
-  });
-  ///////////////////////////////////////////////////////////////////////
 });
