@@ -175,6 +175,33 @@ router.post(
     let author = req.user; // Logged in user
     const { title, caption, location, categories } = req.body;
 
+    // Check if required fields are present
+    if (!title || !caption || !location || !categories) {
+      return res.status(400).json({ error: 'Missing required fields.' });
+    }
+
+    // Validate max length for title, caption, and location
+    const maxLengthTitle = 50;
+    const maxLengthCaption = 1000;
+    const maxLengthLocation = 50;
+    const categoriesArray = categories.split(",").map((cat) => cat.trim());
+
+    if (title.length > maxLengthTitle) {
+      return res.status(400).json({ error: `Title cannot exceed ${maxLengthTitle} characters.` });
+    }
+
+    if (caption.length > maxLengthCaption) {
+      return res.status(400).json({ error: `Caption cannot exceed ${maxLengthCaption} characters.` });
+    }
+
+    if (location.length > maxLengthLocation) {
+      return res.status(400).json({ error: `Location cannot exceed ${maxLengthLocation} characters.` });
+    }
+
+    if (categoriesArray.length < 1 || categoriesArray.length > 3) {
+      return res.status(400).json({ error: 'Categories should be between 1 and 3.' });
+    }
+
     try {
       const postImgURL = await imageUploader(req.files[0]);
 

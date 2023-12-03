@@ -10,6 +10,7 @@ const PostSchema = new Schema({
   title: {
     type: String,
     required: true,
+    maxlength: 50,
   },
   caption: {
     type: String,
@@ -19,6 +20,7 @@ const PostSchema = new Schema({
   location: {
     type: String,
     required: true,
+    maxlength: 50,
   },
   date_created: {
     type: Date,

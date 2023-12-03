@@ -25,6 +25,13 @@ router.put(
   async (req, res) => {
     let { address, bio } = req.body;
     try {
+      if (bio && bio.length > 400) {
+        return res.status(400).json({ error: "Bio cannot exceed 400 characters." });
+      }
+      else if (address && address.length > 100) {
+        return res.status(400).json({ error: "Location cannot exceed 100 characters." });
+      }
+
       var pfp = null;
       var header = null;
 

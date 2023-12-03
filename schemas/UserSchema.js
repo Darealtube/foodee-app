@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
+
+const bioMaxLength = 400;
+const addressMaxLength = 50;
+
 const UserSchema = new Schema({
   name: {
     type: String,
@@ -11,10 +15,13 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  address: String,
+  address: {
+    type: String,
+    maxlength: [addressMaxLength, "Address cannot exceed 50 characters."],
+  },
   bio: {
     type: String,
-    maxlength: 400,
+    maxlength: [bioMaxLength, "Bio cannot exceed 400 characters."],
   },
   pfp: String,
   header: String,
