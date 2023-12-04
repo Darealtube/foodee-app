@@ -140,11 +140,6 @@ $(document).ready(function () {
             $(".status-popup").removeClass("popup-active").removeClass("error");
           }, 2000);
           console.log(data.responseJSON.error);
-          $(".title-input").val("");
-          $("#input-file").val("");
-          $("#description").val("");
-          $("#location").val("");
-          $("#category").val("");
       },
     });
   });
