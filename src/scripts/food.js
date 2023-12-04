@@ -250,13 +250,14 @@ $(document).ready(function () {
           $(".status-popup").removeClass("popup-active").removeClass("success");
         }, 2000);
       },
-      error: () => {
+      error: (data) => {
         // Show the status popup saying that the login/signup has failed
         $(".status-popup").addClass("popup-active").addClass("error");
-        $("#status-message").text(responseJSON.error);
+        $("#status-message").text(data.responseJSON.error);
         setTimeout(() => {
           $(".status-popup").removeClass("popup-active").removeClass("error");
         }, 2000);
+        console.log(data.responseJSON.error)
       },
     });
   });

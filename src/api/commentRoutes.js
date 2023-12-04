@@ -32,6 +32,12 @@ router.post("/api/comments", async (req, res) => {
   let author = req.body.author;
   let authorPFP = req.body.authorPFP;
 
+  if (message.length > 400) {
+    return res
+      .status(401)
+      .json({ error: "Comment should not exceed 400 characters." });
+  }
+
   try {
     await Comment.create({ post, author, message, authorPFP }); // Darryl Javier for the meantime
     res.json({ message: "Comment created successfully." }).status(200);
