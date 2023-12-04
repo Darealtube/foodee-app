@@ -45,57 +45,65 @@ $(document).ready(function () {
   $("#foodForm").submit(function (event) {
     event.preventDefault();
 
-    const postForm = new FormData();
+    const postForm = new FormData();  
 
-    postForm.append("title", $(".title-input").val());
-    postForm.append("post_img", $("#input-file").get(0).files[0]);
-    postForm.append("caption", $("#description").val());
-    postForm.append("location", $("#location").val());
-    postForm.append(
-      "categories",
-      $("#category")
-        .val()
-        .split(",")
-        .map((category) => category.trim())
-    );
+      $(".status-popup")
+        .removeClass("popup-active")
+        .removeClass("error")
+        .removeClass("success"); // Reset the status message display
+      $(".status-popup").addClass("popup-active");
+      $("#status-message").text("Creating post...");
+      setTimeout(() => {
+        $(".status-popup").removeClass("popup-active").removeClass("success");
+      }, 2000);
+      postForm.append("title", $(".title-input").val());
+      postForm.append("post_img", $("#input-file").get(0).files[0]);
+      postForm.append("caption", $("#description").val());
+      postForm.append("location", $("#location").val());
+      postForm.append(
+        "categories",
+        $("#category")
+          .val()
+          .split(",")
+          .map((category) => category.trim())
+      );
 
-    $(".status-popup")
-      .removeClass("popup-active")
-      .removeClass("error")
-      .removeClass("success"); // Reset the status message display
-    $(".status-popup").addClass("popup-active");
-    $("#status-message").text("Creating post...");
-
-    $.ajax({
-      method: "POST",
-      url: "/api/posts",
-      data: postForm,
-      contentType: false, // Let jQuery handle the contentType
-      processData: false,
-      success: (data) => {
-        $(".status-popup")
-          .removeClass("popup-active")
-          .removeClass("error")
-          .removeClass("success"); // Reset the status message display
-        $(".status-popup").addClass("popup-active").addClass("success");
-        $("#status-message").text("Login Success! Redirecting to homepage...");
-        setTimeout(() => {
-          window.location.href = "/index.html";
-          $(".status-popup").removeClass("popup-active").removeClass("success");
-        }, 2000);
-      },
-      error: (data) => {
-        $(".status-popup")
-          .removeClass("popup-active")
-          .removeClass("error")
-          .removeClass("success"); // Reset the status message display
-        $(".status-popup").addClass("popup-active").addClass("error");
-        $("#status-message").text(responseJSON.error);
-        setTimeout(() => {
-          $(".status-popup").removeClass("popup-active").removeClass("error");
-        }, 2000);
-      },
-    });
+      $.ajax({
+        method: "POST",
+        url: "/api/posts",
+        data: postForm,
+        contentType: false, // Let jQuery handle the contentType
+        processData: false,
+        success: (data) => {
+          $(".status-popup")
+            .removeClass("popup-active")
+            .removeClass("error")
+            .removeClass("success"); // Reset the status message display
+          $(".status-popup").addClass("popup-active").addClass("success");
+          $("#status-message").text("Successfully created post! Redirecting to homepage...");
+          setTimeout(() => {
+            window.location.href = "/index.html";
+            $(".status-popup").removeClass("popup-active").removeClass("success");
+          }, 2000);
+        },
+        error: (data) => {
+          $(".status-popup")
+            .removeClass("popup-active")
+            .removeClass("error")
+            .removeClass("success"); // Reset the status message display
+          $(".status-popup").addClass("popup-active").addClass("error");
+          $("#status-message").text(data.responseJSON.error);
+          setTimeout(() => {
+            $(".status-popup").removeClass("popup-active").removeClass("error");
+          }, 2000);
+          console.log(data.responseJSON.error);
+          $(".title-input").val("");
+          $("#input-file").val("");
+          $("#description").val("");
+          $("#location").val("");
+          $("#category").val("");
+        },
+      });
   });
 
   $(".attach-photo").click(function () {
