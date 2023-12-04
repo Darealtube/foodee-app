@@ -131,14 +131,20 @@ $(document).ready(function () {
       },
       error: (data) => {
         $(".status-popup")
-          .removeClass("popup-active")
-          .removeClass("error")
-          .removeClass("success"); // Reset the status message display
-        $(".status-popup").addClass("popup-active").addClass("error");
-        $("#status-message").text(responseJSON.error);
-        setTimeout(() => {
-          $(".status-popup").removeClass("popup-active").removeClass("error");
-        }, 2000);
+            .removeClass("popup-active")
+            .removeClass("error")
+            .removeClass("success"); // Reset the status message display
+          $(".status-popup").addClass("popup-active").addClass("error");
+          $("#status-message").text(data.responseJSON.error);
+          setTimeout(() => {
+            $(".status-popup").removeClass("popup-active").removeClass("error");
+          }, 2000);
+          console.log(data.responseJSON.error);
+          $(".title-input").val("");
+          $("#input-file").val("");
+          $("#description").val("");
+          $("#location").val("");
+          $("#category").val("");
       },
     });
   });
