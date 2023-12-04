@@ -104,10 +104,6 @@ $(document).ready(() => {
           $(".status-popup").removeClass("popup-active").removeClass("error");
         }, 2000);
         console.log(data.responseJSON.error);
-        $(".profile-img").val("");
-        $(".header-img").val("");
-        $("#bio").val("");
-        $("#location-input").val("");
       },
     });
   });
